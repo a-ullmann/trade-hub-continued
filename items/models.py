@@ -10,7 +10,7 @@ class Item(models.Model):
     # created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(
         'categories.Category',
-        related_name='items',
+        related_name='items'
     )
     owner = models.ForeignKey(
         'jwt_auth.User',
