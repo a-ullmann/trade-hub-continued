@@ -25,6 +25,7 @@ class RegisterView(APIView):
             if user_to_register.is_valid():
                 user_to_register.save()
                 return Response('registration success', status=status.HTTP_201_CREATED)
+            print('ERRORRR ==>', user_to_register.errors)
             return Response(user_to_register.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
             print(e)
@@ -34,10 +35,10 @@ class RegisterView(APIView):
 class LoginView(APIView):
 
     def post(self, request):
-        email = request.data['email']
+        username = request.data['username']
         password = request.data['password']
         try:
-            user_to_login = User.objects.get(email=email)
+            user_to_login = User.objects.get(username=username)
             print(user_to_login)
         except User.DoesNotExist as e:
             print(e)
@@ -73,12 +74,13 @@ class UserDetailView(APIView):
 
     def get_user(self, pk):
         try:
+            print(User)
             return User.objects.get(pk=pk)
         except User.DoesNotExist as e:
-            print(e)
+            print('USER DOES NOT EXIST', e)
             raise NotFound(str(e))
         except Exception as e:
-            print(e)
+            print('userdetailview', e)
             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get(self, _request, pk):
@@ -88,12 +90,27 @@ class UserDetailView(APIView):
 
     def put(self, request, pk):
         user = self.get_user(pk)
+
         try:
             user_to_update = UserSerializer(user, request.data, partial=True)
             if user_to_update.is_valid():
                 user_to_update.save()
+                print('USER ===>', user_to_update.data)
                 return Response(user_to_update.data, status.HTTP_202_ACCEPTED)
             print(user_to_update.errors)
             return Response(user_to_update.errors, status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
+            print('put here', e)
+            return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class UserProfileView(APIView):
+
+    def get(self, request):
+        try:
+            user = request.user
+            user_data = self.request.user
+            return Response(user_data)
+        except Exception as e:
+            print('here userprofileview')
             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)

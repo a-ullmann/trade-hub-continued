@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
             })
         password_validation.validate_password(password)
         data['password'] = hashers.make_password(password)
+        print('here from validate')
         return data
 
     class Meta:

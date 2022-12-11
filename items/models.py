@@ -7,6 +7,7 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     duration = models.DurationField()
+    description = models.CharField(max_length=500)
     # created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField(
         'categories.Category',

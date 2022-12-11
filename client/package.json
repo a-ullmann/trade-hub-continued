@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "axios": "^0.25.0",
+    "bootstrap": "^5.2.3",
+    "buffer": "^6.0.3",
     "eslint-plugin-react": "^7.31.11",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.5",
     "react-scripts": "^5.0.1",
@@ -33,5 +36,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://127.0.0.1:8000/"
 }

@@ -6,11 +6,11 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 class ItemListView(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly, )
+    # permission_classes = (IsAuthenticated, )
 
     def get(self, _request):
         items = Item.objects.all()
@@ -35,7 +35,7 @@ class ItemListView(APIView):
 
 
 class ItemDetailView(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly, )
+    # permission_classes = (IsAuthenticated, )
 
     def get_item(self, pk):
         try:

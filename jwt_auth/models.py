@@ -8,4 +8,4 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=50)
     profile_image = models.URLField(
         max_length=300, default=None, blank=True, null=True)
-    wallet = models.FloatField(max_length=100, default=False)
+    wallet = models.FloatField(default=5000, blank=True)
