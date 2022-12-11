@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react'
-import { Container, Row, Col, Card, Collapse } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 
 
-const ItemIndex = () => {
+
+const ItemIndex = ({ searchedItems }) => {
 
   const [items, setItems] = useState([])
+  const [error, setError] = useState(false)
+
+
+
 
 
   useEffect(() => {
@@ -17,6 +25,7 @@ const ItemIndex = () => {
         setItems(data)
       } catch (err) {
         console.log(err)
+        setError(err)
       }
     }
     getData()
@@ -29,13 +38,13 @@ const ItemIndex = () => {
   return (
     <main className='home-page'>
       <Container className='items-container'>
-        <Row className='g-4 items-row' >
+        <Row className=' items-row' >
           {items.map(item => {
             const { name, price, id, duration } = item
             return (
-              <Col key={id} sm='6' md='3' className='items-col'>
+              <Col key={id} sm='6' md='3' className='m-3 items-col'>
                 <Link to={`${id}`}>
-                  <Card className='items-card'>
+                  <Card border='primary' style={{ width: '18rem' }} className='items-card'>
                     <Card.Body>
                       <Card.Footer className='items-div'>
                         {name}, ${price} - Time Left: {duration}
