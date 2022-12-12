@@ -14,8 +14,8 @@ const ItemForm = () => {
   const [error, setError] = useState(false)
   const [itemFields, setItemFields] = useState({
     name: '',
-    price: Number,
-    duration: Number,
+    price: '',
+    duration: '',
     description: '',
     item_image: '',
     categories: '',
@@ -52,7 +52,7 @@ const ItemForm = () => {
           Authorization: `Bearer ${getToken()}`,
         },
       })
-      setItemFields({ name: '', price: Number, duration: Number, description: '', profile_image: '', categories: '' })
+      setItemFields({ name: '', price: '', duration: '', description: '', profile_image: '', categories: '' })
       // startCountdown()
       navigate(`/${data.id}`)
     } catch (err) {

@@ -1,4 +1,5 @@
 $primary: rgb(152, 152, 152);
+$accent: #9fbcb8;
 
 body {
   min-height: 100vh;
@@ -7,12 +8,37 @@ body {
 
 
 
+.auth-pages {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  width: 30em;
+  height: 20em;
+  margin-top: -10em;
+  margin-left: -15em;
 
+  .auth-hero {
+    width: 50%;
+    height: 50%;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin: 10px;
+    }
+  }
+}
 
 
 .navbar {
   color: white;
-
 
   .search-container {
     display: flex;
@@ -65,15 +91,10 @@ body {
     justify-content: center;
   }
 
-  .items-col {}
-
   .card {
-    // padding: 16px;
-    // margin: 16px;
     max-width: 270px;
     width: 10%;
     font-size: 100%;
-    // min-height: 300px;
   }
 }
 

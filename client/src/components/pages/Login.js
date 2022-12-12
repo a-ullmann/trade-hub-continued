@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setToken } from '../../helpers/auth'
+import flower from '../../assets/flower-blossom-minimal-black.jpeg'
 
 
 
@@ -38,29 +39,35 @@ const Login = () => {
 
 
   return (
-    <main>
-      <h1>LOGIN</h1>
+    <main className='auth-pages'>
+      <div className='auth-hero' style={{ backgroundImage: `url(${flower})` }}>
+
+      </div>
       <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            name='username'
-            placeholder='Username *'
-            onChange={handleChange}
-            value={formFields.username}
-            required
-          />
-          <input
-            type='password'
-            name='password'
-            placeholder='Password *'
-            onChange={handleChange}
-            value={formFields.password}
-            required
-          />
-          {error && <small className='text-danger'>{error}</small>}
-          <button>Log in</button>
-        </form>
+        <h1>LOGIN</h1>
+        <p>Don&apos;t have an account? <span className='login-here' onClick={() => (navigate('/register'))}>Register here.</span></p>
+        <div className='login'>
+          <form onSubmit={handleSubmit}>
+            <input
+              type='text'
+              name='username'
+              placeholder='Username *'
+              onChange={handleChange}
+              value={formFields.username}
+              required
+            />
+            <input
+              type='password'
+              name='password'
+              placeholder='Password *'
+              onChange={handleChange}
+              value={formFields.password}
+              required
+            />
+            {error && <small className='text-danger'>{error}</small>}
+            <button>Log in</button>
+          </form>
+        </div>
       </div>
     </main>
   )

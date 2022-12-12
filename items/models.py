@@ -6,7 +6,7 @@ from django.db import models
 class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
-    duration = models.DurationField()
+    duration = models.IntegerField()
     description = models.CharField(max_length=500, blank=True, null=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     item_image = models.URLField(
