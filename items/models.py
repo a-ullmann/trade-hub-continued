@@ -8,12 +8,14 @@ class Item(models.Model):
     price = models.FloatField()
     duration = models.IntegerField()
     description = models.CharField(max_length=500, blank=True, null=True)
-    # created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     item_image = models.URLField(
         max_length=300, default=None, blank=True, null=True)
-    categories = models.ManyToManyField(
-        'categories.Category',
-        related_name='items'
+    category = models.ForeignKey(
+        'category.Category',
+        related_name='items',
+        default=None,
+        on_delete=models.CASCADE
     )
     owner = models.ForeignKey(
         'jwt_auth.User',

@@ -21,7 +21,7 @@ class ItemListView(APIView):
         return Response(serialized_items.data)
 
     def post(self, request):
-        print("REQUEST USER 🚨 ==>", request.user.id)
+        print("REQUEST USER 🚨 ==>", request.user.id, request.user.username)
         request.data['owner'] = request.user.id
         try:
             print('posting new item 🚨 ==>', request.data)
@@ -78,3 +78,8 @@ class ItemDetailView(APIView):
             return Response(item_to_update.errors, status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
             return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def delete(self, request, pk):
+        item = self.get_item(pk)
+        item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

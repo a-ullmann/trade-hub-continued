@@ -20,10 +20,11 @@ const Profile = ({ itemFields, setItemFields, items }) => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        const response = await axios.get(`/api/auth/users/${userId}`)
+        const response = await axios.get(`/api/auth/users/${userId}/`)
         setProfile(response.data)
-        console.log(response.data)
+        console.log('get profile response ==>', response.data)
       } catch (err) {
+        console.log(err.message)
         setError(err)
       }
     }
@@ -33,6 +34,7 @@ const Profile = ({ itemFields, setItemFields, items }) => {
   return (
     <main>
       <Container>
+        <h2>USER PROFILE</h2>
         <div>
           {profile &&
             profile.username}

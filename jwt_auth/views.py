@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from rest_framework.exceptions import PermissionDenied, NotFound
+from rest_framework.exceptions import PermissionDenied, NotFound, ValidationError
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -20,15 +20,18 @@ class RegisterView(APIView):
     def post(self, request):
         try:
             user_to_register = UserSerializer(data=request.data)
-            print(user_to_register)
+            # print('user to register ==>', user_to_register)
             if user_to_register.is_valid():
-                user_to_register.save()
-                return Response('registration success', status=status.HTTP_201_CREATED)
-            print('ERRORRR ==>', user_to_register.errors)
+                try:
+                    user_to_register.save()
+                    return Response('registration success', status=status.HTTP_201_CREATED)
+                except ValidationError as e:
+                    return Response('Invalid user input: 🚨 ' + str(e), status.HTTP_422_UNPROCESSABLE_ENTITY)
+            print('ERRORRR 👻 ==>', user_to_register.errors)
             return Response(user_to_register.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
             print(e)
-            return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response('Database error: 🚨 ' + str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class LoginView(APIView):
@@ -89,7 +92,6 @@ class UserDetailView(APIView):
 
     def put(self, request, pk):
         user = self.get_user(pk)
-
         try:
             user_to_update = UserSerializer(user, request.data, partial=True)
             if user_to_update.is_valid():
@@ -103,12 +105,12 @@ class UserDetailView(APIView):
             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class UserProfileView(APIView):
-
-    def get(self, _request):
-        try:
-            user_data = self.request.user
-            return Response(user_data)
-        except Exception as e:
-            print('here userprofileview')
-            return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
+# class UserProfileView(APIView):
+#     def get(self, _request):
+#         try:
+#             user_data = self.request.user
+#             print('here userprofileview')
+#             return Response(user_data)
+#         except Exception as e:
+#             print('here userprofileview')
+#             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)

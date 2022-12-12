@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom'
 import { getToken } from '../../helpers/auth'
+import ImageUpload from './ImageUpload'
 
 const ItemForm = () => {
 
@@ -18,7 +19,7 @@ const ItemForm = () => {
     duration: '',
     description: '',
     item_image: '',
-    categories: '',
+    category: '',
   })
 
   // const handleDays = (e) => {
@@ -52,10 +53,11 @@ const ItemForm = () => {
           Authorization: `Bearer ${getToken()}`,
         },
       })
-      setItemFields({ name: '', price: '', duration: '', description: '', profile_image: '', categories: '' })
+      setItemFields({ name: '', price: '', duration: '', description: '', profile_image: '', category: '' })
       // startCountdown()
       navigate(`/${data.id}`)
     } catch (err) {
+      console.log(err)
       console.log(err.message ? err.message : err.response.data.message)
       setError(err.message ? err.message : err.response.data.message)
     }
@@ -97,23 +99,26 @@ const ItemForm = () => {
           name='description'
           onChange={handleChange}
           value={itemFields.description}
-          placeholder='Item Description *'
-          required
+          placeholder='Item Description'
         />
-        <input
+        {/* <input
           type='text'
           name='item_image'
           onChange={handleChange}
           value={itemFields.item_image}
-          placeholder='Image'
-        />
+          placeholder='Item Image'
+        /> */}
         <input
-          type='text'
-          name='categories'
+          type='number'
+          name='category'
           onChange={handleChange}
-          value={itemFields.categories}
-          placeholder='Categories *'
-          required
+          value={itemFields.category}
+          placeholder='Item Categoy'
+        />
+        <ImageUpload
+          itemFields={itemFields}
+          setItemFields={setItemFields}
+          item_image={itemFields.item_image}
         />
         <button className='u'>Create Listing</button>
       </form>

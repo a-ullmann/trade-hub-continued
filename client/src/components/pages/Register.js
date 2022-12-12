@@ -9,10 +9,10 @@ const Register = () => {
   const [formFields, setFormFields] = useState({
     email: '',
     username: '',
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     password: '',
-    passwordConfirmation: '',
+    password_confirmation: '',
     wallet: '',
   })
 
@@ -25,10 +25,10 @@ const Register = () => {
       await axios.post('/api/auth/register/', formFields)
       navigate('/login')
     } catch (err) {
+      console.log(err.response.data.password_confirmation[0])
       setError(err.response.data.message)
     }
   }
-
   const handleChange = (e) => {
     const updatedFormFields = {
       ...formFields,
@@ -37,6 +37,8 @@ const Register = () => {
     setFormFields(updatedFormFields)
     if (error) setError('')
   }
+
+
 
 
   return (
@@ -61,7 +63,7 @@ const Register = () => {
         />
         <input
           type='text'
-          name='firstName'
+          name='first_name'
           placeholder='First Name *'
           onChange={handleChange}
           value={formFields.firstName}
@@ -69,7 +71,7 @@ const Register = () => {
         />
         <input
           type='text'
-          name='lastName'
+          name='last_name'
           placeholder='Last Name *'
           onChange={handleChange}
           value={formFields.lastName}
@@ -85,7 +87,7 @@ const Register = () => {
         />
         <input
           type='password'
-          name='passwordConfirmation'
+          name='password_confirmation'
           placeholder='Confirm Password *'
           onChange={handleChange}
           value={formFields.passwordConfirmation}
@@ -98,21 +100,12 @@ const Register = () => {
           placeholder='Enter your amount *'
           onChange={handleChange}
           value={formFields.wallet}
-
         />
+        {error && <small className='text-danger'>{error}</small>}
         <button className='uni-btn-primary mt-5 mb-4'>Register</button>
       </form>
     </main>
   )
 
-
 }
 export default Register
-
-// email: '',
-// username: '',
-// first_name: '',
-// last_name: '',
-// password: '',
-// password_confirmation: '',
-// wallet: '',

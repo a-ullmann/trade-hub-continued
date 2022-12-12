@@ -32,8 +32,8 @@ const Login = () => {
       setToken(data.token)
       navigate('/')
     } catch (err) {
-      console.log('error', err)
-      setError(err.response.data.message)
+      console.log('error', err.response.data.detail)
+      setError(err.response.data.detail)
     }
   }
 

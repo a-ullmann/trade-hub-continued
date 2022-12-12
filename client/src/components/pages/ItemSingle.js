@@ -13,7 +13,7 @@ const ItemSingle = () => {
     name: '',
     price: '',
     duration: '',
-    categories: '',
+    category: '',
     description: '',
   })
 
