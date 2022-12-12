@@ -39,6 +39,22 @@ const SearchBar = () => {
   // }, [search])
 
 
+  // from navibar
+  // useEffect(() => {
+  //   getData()
+  // }, [search])
+
+  // const getData = async () => {
+  //   try {
+  //     const { data } = await axios.get(`/api/items?name=${search}`)
+  //     console.log(data)
+  //     setSearchResults(data)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
+
 
 
   return (

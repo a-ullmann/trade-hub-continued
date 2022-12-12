@@ -5,10 +5,10 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
+import ItemForm from '../common/ItemForm'
 
 
-
-const ItemIndex = ({ searchedItems }) => {
+const ItemIndex = ({ itemFields, setItemFields }) => {
 
   const [items, setItems] = useState([])
   const [error, setError] = useState(false)
@@ -38,11 +38,11 @@ const ItemIndex = ({ searchedItems }) => {
   return (
     <main className='home-page'>
       <Container className='items-container'>
-        <Row className=' items-row' >
+        <Row className='items-row ' >
           {items.map(item => {
             const { name, price, id, duration } = item
             return (
-              <Col key={id} sm='6' md='3' className='m-3 items-col'>
+              <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
                 <Link to={`${id}`}>
                   <Card border='primary' style={{ width: '18rem' }} className='items-card'>
                     <Card.Body>
@@ -56,6 +56,10 @@ const ItemIndex = ({ searchedItems }) => {
             )
           })}
         </Row>
+        <ItemForm
+          itemFields={itemFields}
+          setItemFields={setItemFields}
+          items={items} />
       </Container>
     </main >
   )

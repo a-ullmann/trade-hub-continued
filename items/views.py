@@ -3,7 +3,7 @@ from .serializers.common import ItemSerializer
 from .serializers.populated import PopulatedItemSerializer
 
 
-from rest_framework import status, viewsets, generics
+from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
@@ -13,10 +13,11 @@ from rest_framework.permissions import IsAuthenticated
 class ItemListView(APIView):
     # permission_classes = (IsAuthenticated, )
 
-    def get(self, _request):
+    def get(self, request):
         items = Item.objects.all()
         # print('items =>', items)
         serialized_items = PopulatedItemSerializer(items, many=True)
+        print('request 🚨 ==>', request.data)
         return Response(serialized_items.data)
 
     def post(self, request):

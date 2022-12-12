@@ -14,7 +14,7 @@ const App = () => {
 
 
   return (
-    <div>
+    <div className='wrapper'>
       <BrowserRouter>
         <Navibar />
         <Routes>

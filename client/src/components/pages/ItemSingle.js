@@ -35,13 +35,25 @@ const ItemSingle = () => {
 
 
   return (
-    <main>
+    <main className='single-page'>
       <Container>
-        <div>
-          {item.name}<br /> ${item.price} <br /> {item.duration} <br /> {item.description}
-        </div>
+        <Row>
+          <Col xs={12} md={3}>
+            <div className='item-name'>
+              {item.name}<br />
+            </div>
+          </Col>
+          <Col xs={12} md={3}>
+            <div className='item-price'>
+              ${item.price} <br />
+            </div>
+            <div className='item-duration'>
+              {item.duration} <br /> {item.description}
+            </div>
+          </Col>
+        </Row>
       </Container>
-    </main>
+    </main >
   )
 }
 

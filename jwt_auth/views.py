@@ -9,7 +9,6 @@ from django.conf import settings
 
 from .serializers.common import UserSerializer
 from .models import User
-from .serializers.common import UserSerializer
 
 from datetime import datetime, timedelta
 import jwt
@@ -106,9 +105,8 @@ class UserDetailView(APIView):
 
 class UserProfileView(APIView):
 
-    def get(self, request):
+    def get(self, _request):
         try:
-            user = request.user
             user_data = self.request.user
             return Response(user_data)
         except Exception as e:
