@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
-from .serializers.common import UserSerializer
+from .serializers.common import UserSerializer, PartialUserSerializer
 from .models import User
 
 from datetime import datetime, timedelta
@@ -17,6 +17,7 @@ User = get_user_model()
 
 
 class RegisterView(APIView):
+
     def post(self, request):
         try:
             user_to_register = UserSerializer(data=request.data)
@@ -93,7 +94,8 @@ class UserDetailView(APIView):
     def put(self, request, pk):
         user = self.get_user(pk)
         try:
-            user_to_update = UserSerializer(user, request.data, partial=True)
+            user_to_update = PartialUserSerializer(
+                user, request.data, partial=True)
             if user_to_update.is_valid():
                 user_to_update.save()
                 print('USER ===>', user_to_update.data)

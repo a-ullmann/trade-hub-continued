@@ -27,3 +27,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'username', 'first_name', 'last_name',
                   'profile_image', 'password', 'password_confirmation', 'wallet')
+
+
+class PartialUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'username', 'first_name', 'last_name',
+                  'profile_image', 'wallet')

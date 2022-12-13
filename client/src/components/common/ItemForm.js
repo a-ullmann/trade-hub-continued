@@ -48,7 +48,7 @@ const ItemForm = () => {
     e.preventDefault()
     try {
       if (!getToken()) throw new Error('Please log in to create a listing.')
-      const { data } = await axios.post('api/items/', itemFields, {
+      const { data } = await axios.post('/api/items/', itemFields, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

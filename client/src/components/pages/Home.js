@@ -20,6 +20,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
   useEffect(() => {
     const getData = async () => {
       try {
+        console.log('executed')
         const { data } = await axios.get('/api/items/')
         console.log('data from homepage ==>', data)
         setItems(data)
@@ -31,7 +32,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
     getData()
   }, [])
 
-
+  const defaultImage = ''
 
 
 
@@ -46,6 +47,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
                 <Link to={`${id}`}>
                   <Card border='primary' style={{ width: '18rem' }} className='items-card'>
                     <Card.Body>
+                      <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
                       <Card.Footer className='items-div'>
                         {name}, ${price} - Time Left: {duration}
                       </Card.Footer>

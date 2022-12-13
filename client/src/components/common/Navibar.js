@@ -90,7 +90,7 @@ const Navibar = () => {
         <div className='nav-items'>
           {isAuthenticated() ?
             <>
-              <Nav.Link as={Link} to={`/profile/${userId}`}>Profile</Nav.Link>
+              <Nav.Link as={Link} to={`/users/${userId}`}>Profile</Nav.Link>
               <span onClick={() => handleLogout(navigate)}>Logout</span>
             </>
             :

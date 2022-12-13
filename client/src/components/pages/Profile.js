@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Tabs, Tab, Container } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getToken, isAuthenticated } from '../../helpers/auth'
 import ItemForm from '../common/ItemForm'
@@ -31,14 +31,68 @@ const Profile = ({ itemFields, setItemFields, items }) => {
     getProfile()
   }, [])
 
+
+
+  // const handlesSubmit = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     await axios.post('/api/auth/register/', formFields)
+  //     navigate('/login')
+  //   } catch (err) {
+  //     console.log(err.response.data.password_confirmation[0])
+  //     setError(err.response.data.message)
+  //   }
+  // }
+
+
+
+  const handleDeposit = (e) => {
+    const updatedWallet = {
+      ...profile,
+      wallet: profile.wallet + 1000,
+    }
+    setProfile(updatedWallet)
+    console.log('profile ==>', profile)
+    console.log('wallet ==>', profile.wallet)
+    if (error) setError('')
+  }
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.patch(`/api/profile/${userId}/`, profile, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+
+
+
+
+
+
+
   return (
     <main>
       <Container>
         <h2>USER PROFILE</h2>
         <div>
           {profile &&
-            profile.username}
+            <>
+              <h2>{profile.username}</h2>
+              <div>$ {profile.wallet}</div>
+            </>
+          }
         </div>
+        <button onClick={handleDeposit}>DEPOSIT $$</button>
         <ItemForm
           itemFields={itemFields}
           setItemFields={setItemFields}

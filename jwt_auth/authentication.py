@@ -14,7 +14,6 @@ class JWTAuthentication(BaseAuthentication):
 
         headers = request.headers.get('Authorization')
         if not headers:
-            print('authorization header not present')
             return None
 
         if not headers.startswith('Bearer '):
