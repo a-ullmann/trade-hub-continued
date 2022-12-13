@@ -11,10 +11,13 @@ const Profile = ({ itemFields, setItemFields, items }) => {
 
   const [profile, setProfile] = useState()
   const [error, setError] = useState(false)
+  const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
 
   const { userId } = useParams()
+
+
 
 
   useEffect(() => {
@@ -32,30 +35,30 @@ const Profile = ({ itemFields, setItemFields, items }) => {
   }, [])
 
 
-
-  // const handlesSubmit = async (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     await axios.post('/api/auth/register/', formFields)
-  //     navigate('/login')
-  //   } catch (err) {
-  //     console.log(err.response.data.password_confirmation[0])
-  //     setError(err.response.data.message)
-  //   }
-  // }
-
-
-
-  const handleDeposit = (e) => {
-    const updatedWallet = {
-      ...profile,
-      wallet: profile.wallet + 1000,
+  const handleDeposit = async () => {
+    try {
+      const updatedWallet = {
+        ...profile,
+        wallet: profile.wallet + 1000,
+      }
+      await axios.put(`/api/auth/users/${userId}/`, updatedWallet, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      console.log('profile ==>', profile)
+      console.log('wallet ==>', profile.wallet)
+      setRefresh(true)
+      // setProfile(updatedWallet)
+    } catch (err) {
+      if (error) setError('')
     }
-    setProfile(updatedWallet)
-    console.log('profile ==>', profile)
-    console.log('wallet ==>', profile.wallet)
-    if (error) setError('')
   }
+
+
+
+
+
 
 
 
@@ -93,11 +96,22 @@ const Profile = ({ itemFields, setItemFields, items }) => {
           }
         </div>
         <button onClick={handleDeposit}>DEPOSIT $$</button>
-        <ItemForm
-          itemFields={itemFields}
-          setItemFields={setItemFields}
-          items={items}
-        />
+        <Tabs defaultActiveKey='purchased' id='user-profile-tabs'>
+          <Tab eventKey='purchased' title='Purchased'>
+
+          </Tab>
+          <Tab eventKey='listed' title='Listed'>
+
+          </Tab>
+          <Tab eventKey='create-listing' title='Create Listing'>
+
+            <ItemForm
+              itemFields={itemFields}
+              setItemFields={setItemFields}
+              items={items}
+            />
+          </Tab>
+        </Tabs>
       </Container>
     </main>
   )

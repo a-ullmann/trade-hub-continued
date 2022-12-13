@@ -6,10 +6,14 @@ import { getToken, getPayload } from '../../helpers/auth'
 
 
 
+
 const ItemSingle = () => {
 
-  const [profile, setProfile] = useState()
+
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [isValid, setIsValid] = useState(true)
   const [refresh, setRefresh] = useState(false)
+  const [profile, setProfile] = useState()
   const [item, setItem] = useState([])
   const [error, setError] = useState(false)
   const [userId] = useState(() => {
@@ -17,8 +21,13 @@ const ItemSingle = () => {
     return ''
   })
 
-
   const { itemId } = useParams()
+  const navigate = useNavigate()
+
+
+
+
+
 
   useEffect(() => {
     const getItem = async () => {
@@ -30,7 +39,7 @@ const ItemSingle = () => {
       }
     }
     getItem()
-  }, [itemId, refresh])
+  }, [itemId])
 
   useEffect(() => {
     const getProfile = async () => {
@@ -44,29 +53,55 @@ const ItemSingle = () => {
       }
     }
     getProfile()
-  }, [])
+  }, [refresh])
 
 
   // button 
 
+
+
+
+
+
   const handleBuy = async () => {
-    try {
-      const updateProfile = {
-        ...profile,
-        wallet: profile.wallet - item.price,
+    setShowConfirmation(true)
+  }
+
+
+
+
+
+  const handleYes = async () => {
+    if (profile.wallet > item.price) {
+      try {
+        const updateProfile = {
+          ...profile,
+          wallet: profile.wallet - item.price,
+        }
+        console.log('profile ==>', profile)
+        console.log('wallet ==>', profile.wallet)
+        await axios.put(`/api/auth/users/${userId}/`, updateProfile, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
+        setRefresh(true)
+
+        navigate(`/users/${userId}/`)
+      } catch (err) {
+        console.log(err)
+        setError(err)
       }
-      console.log('profile ==>', profile)
-      console.log('wallet ==>', profile.wallet)
-      await axios.put(`/api/auth/users/${userId}/`, updateProfile, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      })
-      setRefresh(true)
-    } catch (err) {
-      setError(err)
+    } else {
+      setIsValid(false)
     }
   }
+
+  const handleNo = async () => {
+    setShowConfirmation(false)
+  }
+
+
 
 
 
@@ -87,6 +122,13 @@ const ItemSingle = () => {
               {item.duration} <br /> {item.description}
             </div>
             <button onClick={handleBuy}>BUY NOW</button>
+            {showConfirmation && isValid ? <div className='confirmation'>Are you sure you want to purchase this item?
+              <button onClick={handleYes}>Yes</button>
+              <button onClick={handleNo}>No</button>
+            </div>
+              : null
+            }
+            {!isValid ? <div>Wallet balance too low</div> : null}
           </Col>
         </Row>
       </Container>

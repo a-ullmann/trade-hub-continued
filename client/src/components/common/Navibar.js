@@ -10,6 +10,8 @@ import axios from 'axios'
 
 
 const Navibar = () => {
+
+
   const navigate = useNavigate()
   const [userId] = useState(() => {
     if (getToken()) return getPayload().sub
@@ -18,6 +20,11 @@ const Navibar = () => {
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
+
+
+
+
+
 
   useEffect(() => {
     const handleClick = (e) => {
