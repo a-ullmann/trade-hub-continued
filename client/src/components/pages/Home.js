@@ -21,7 +21,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
     const getData = async () => {
       try {
         console.log('executed')
-        const { data } = await axios.get('/api/items/')
+        const { data } = await axios.get('/api/items/listings/')
         console.log('data from homepage ==>', data)
         setItems(data)
       } catch (err) {

@@ -1,9 +1,9 @@
-from .common import ItemSerializer
+from .common import ListingsSerializer
 from jwt_auth.serializers.common import UserSerializer
 from category.serializers.common import CategorySerializer
 # from category.serializers.populated import PopulatedCategorySerializer
 
 
-class PopulatedItemSerializer(ItemSerializer):
+class PopulatedListingsSerializer(ListingsSerializer):
     category = CategorySerializer()
     owner = UserSerializer()

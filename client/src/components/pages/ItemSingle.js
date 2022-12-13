@@ -32,7 +32,7 @@ const ItemSingle = () => {
   useEffect(() => {
     const getItem = async () => {
       try {
-        const { data } = await axios.get(`/api/items/${itemId}/`)
+        const { data } = await axios.get(`/api/items/listings/${itemId}/`)
         setItem(data)
       } catch (err) {
         setError(err)

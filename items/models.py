@@ -13,13 +13,13 @@ class Listings(models.Model):
         max_length=300, default=None, blank=True, null=True)
     category = models.ForeignKey(
         'category.Category',
-        related_name='items',
+        related_name='listings',
         default=None,
         on_delete=models.CASCADE
     )
     owner = models.ForeignKey(
         'jwt_auth.User',
-        related_name='items',
+        related_name='listings',
         on_delete=models.CASCADE
     )
 
