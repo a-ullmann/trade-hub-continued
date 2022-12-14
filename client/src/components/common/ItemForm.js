@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom'
 import { getToken } from '../../helpers/auth'
@@ -21,6 +21,32 @@ const ItemForm = () => {
     item_image: '',
     category: '',
   })
+  const [categories, setCategories] = useState([])
+
+
+
+
+
+
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get('/api/category')
+        console.log('categories 👍🏼 ==>', categories)
+        setCategories(data)
+      } catch (err) {
+        console.log(err)
+        setError(err)
+      }
+    }
+    getData()
+  }, [])
+
+
+
+
+
 
   // const handleDays = (e) => {
   //   setDays(e.target.value)
@@ -40,6 +66,8 @@ const ItemForm = () => {
 
 
   const handleChange = (e) => {
+    console.log('e value =====>', e.target.value)
+    console.log('e name =====>', e.target.name)
     setItemFields({ ...itemFields, [e.target.name]: e.target.value })
     if (error) setError(true)
   }
@@ -101,20 +129,14 @@ const ItemForm = () => {
           value={itemFields.description}
           placeholder='Item Description'
         />
-        {/* <input
-          type='text'
-          name='item_image'
-          onChange={handleChange}
-          value={itemFields.item_image}
-          placeholder='Item Image'
-        /> */}
-        <input
-          type='number'
-          name='category'
-          onChange={handleChange}
-          value={itemFields.category}
-          placeholder='Item Categoy'
-        />
+        <select name='category' onChange={handleChange}>
+          {categories.map(category => {
+            const { name, id } = category
+            return (
+              <option key={id} value={id}>{name}</option>
+            )
+          })}
+        </select>
         <ImageUpload
           itemFields={itemFields}
           setItemFields={setItemFields}

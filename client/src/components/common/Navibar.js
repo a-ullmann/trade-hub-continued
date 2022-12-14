@@ -54,8 +54,8 @@ const Navibar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axios.get(`/api/items/search?name=${search}/`)
-      console.log(data)
+      const { data } = await axios.get(`/api/items/${search}/`)
+      console.log('data from search', data)
       setSearchResults(data)
     } catch (err) {
       console.log(err)

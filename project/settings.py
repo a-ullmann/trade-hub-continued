@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'items',
     'jwt_auth',
     'category',
-    'subcategory',
 ]
 
 MIDDLEWARE = [

@@ -19,14 +19,16 @@ class Listings(models.Model):
     )
     owner = models.ForeignKey(
         'jwt_auth.User',
-        related_name='listings',
+        related_name='owner_listings',
         on_delete=models.CASCADE
+    )
+    buyer = models.ForeignKey(
+        'jwt_auth.User',
+        related_name='bought_listings',
+        on_delete=models.CASCADE,
+        default='Jeff',
+        null=True
     )
 
     def __str__(self):
         return f'{self.name} - {self.price} ({self.duration})'
-
-
-class Purchases(models.Model):
-    buyer = models.CharField(max_length=100)
-    listing = models.ForeignKey(Listings, on_delete=models.CASCADE)

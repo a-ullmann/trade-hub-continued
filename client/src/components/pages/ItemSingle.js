@@ -28,11 +28,12 @@ const ItemSingle = () => {
 
 
 
-
+  // get single item
   useEffect(() => {
     const getItem = async () => {
       try {
         const { data } = await axios.get(`/api/items/listings/${itemId}/`)
+        console.log(item.id)
         setItem(data)
       } catch (err) {
         setError(err)
@@ -41,6 +42,12 @@ const ItemSingle = () => {
     getItem()
   }, [itemId])
 
+
+
+
+
+
+  // get profile
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -56,20 +63,16 @@ const ItemSingle = () => {
   }, [refresh])
 
 
+
+
+
+
+
+
   // button 
-
-
-
-
-
-
   const handleBuy = async () => {
     setShowConfirmation(true)
   }
-
-
-
-
 
   const handleYes = async () => {
     if (profile.wallet > item.price) {
@@ -85,8 +88,15 @@ const ItemSingle = () => {
             Authorization: `Bearer ${getToken()}`,
           },
         })
+        const updateItem = {
+          ...item,
+          category: item.category.id,
+          owner: item.owner.id,
+          buyer: userId,
+        }
+        await axios.put(`/api/items/listings/${item.id}/`, updateItem)
+        console.log('item after purchase 👄 ==>', updateItem)
         setRefresh(true)
-
         navigate(`/users/${userId}/`)
       } catch (err) {
         console.log(err)

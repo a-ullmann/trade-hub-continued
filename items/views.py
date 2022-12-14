@@ -1,5 +1,5 @@
-from .models import Listings, Purchases
-from .serializers.common import ListingsSerializer, PurchasesSerializer
+from .models import Listings
+from .serializers.common import ListingsSerializer
 from .serializers.populated import PopulatedListingsSerializer
 
 
@@ -17,7 +17,6 @@ class ListingsListView(APIView):
         listings = Listings.objects.all()
         # print('listings =>', listings)
         serialized_listings = PopulatedListingsSerializer(listings, many=True)
-        print('request 🚨 ==>', request.data)
         return Response(serialized_listings.data)
 
     def post(self, request):
@@ -37,14 +36,11 @@ class ListingsListView(APIView):
 
 
 class ListingsSearchView(generics.ListAPIView):
-    queryset = Listings.objects.all()
-    serializer_class = ListingsSerializer
 
-    def get_queryset(self):
-        query = self.request.query_params.get('name')
-        if query:
-            return self.queryset.filter(name__contains=query)
-        return self.queryset
+    def get(self, _request, query):
+        listings = Listings.objects.filter(name__icontains=query)
+        serialized_listings = PopulatedListingsSerializer(listings, many=True)
+        return Response(serialized_listings.data)
 
 
 class ListingsDetailView(APIView):
@@ -83,10 +79,3 @@ class ListingsDetailView(APIView):
         listings = self.get_listings(pk)
         listings.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class PurchasesView(APIView):
-    def get(self, _request):
-        purchases = Purchases.objects.all()
-        serializer = PurchasesSerializer(purchases, many=True)
-        return Response(serializer.data)

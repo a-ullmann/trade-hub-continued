@@ -12,7 +12,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
 
   const [items, setItems] = useState([])
   const [error, setError] = useState(false)
-
+  const defaultImage = ''
 
 
 
@@ -20,9 +20,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
   useEffect(() => {
     const getData = async () => {
       try {
-        console.log('executed')
         const { data } = await axios.get('/api/items/listings/')
-        console.log('data from homepage ==>', data)
         setItems(data)
       } catch (err) {
         console.log(err)
@@ -32,7 +30,7 @@ const ItemIndex = ({ itemFields, setItemFields }) => {
     getData()
   }, [])
 
-  const defaultImage = ''
+
 
 
 

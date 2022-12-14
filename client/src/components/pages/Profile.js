@@ -1,25 +1,28 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Tabs, Tab, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Tabs, Tab, Container, Row, Col, Card } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getToken, isAuthenticated } from '../../helpers/auth'
 import ItemForm from '../common/ItemForm'
 
 
 
-const Profile = ({ itemFields, setItemFields, items }) => {
+const Profile = ({ itemFields, setItemFields }) => {
 
+
+  const [items, setItems] = useState([])
   const [profile, setProfile] = useState()
   const [error, setError] = useState(false)
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
-
+  const defaultImage = ''
   const { userId } = useParams()
 
 
 
-
+  // get profile
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -34,7 +37,23 @@ const Profile = ({ itemFields, setItemFields, items }) => {
     getProfile()
   }, [])
 
+  // get all items
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get('/api/items/listings/')
+        console.log('dataaaaa', data)
+        setItems(data)
+      } catch (err) {
+        console.log(err)
+        setError(err)
+      }
+    }
+    getData()
+  }, [])
 
+
+  // handle deposit
   const handleDeposit = async () => {
     try {
       const updatedWallet = {
@@ -98,7 +117,23 @@ const Profile = ({ itemFields, setItemFields, items }) => {
         <button onClick={handleDeposit}>DEPOSIT $$</button>
         <Tabs defaultActiveKey='purchased' id='user-profile-tabs'>
           <Tab eventKey='purchased' title='Purchased'>
-
+            {items.map(item => {
+              const { name, price, id, duration, owner, buyer } = item
+              return (
+                <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
+                  <Link to={`/${id}`}>
+                    <Card border='primary' style={{ width: '18rem' }} className='items-card'>
+                      <Card.Body>
+                        <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+                        <Card.Footer className='items-div'>
+                          {name}, ${price} <br /> owner: {owner.username}, buyer: {buyer}
+                        </Card.Footer>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                </Col>
+              )
+            })}
           </Tab>
           <Tab eventKey='listed' title='Listed'>
 

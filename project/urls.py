@@ -21,5 +21,4 @@ urlpatterns = [
     path('api/items/', include('items.urls')),
     path('api/auth/', include('jwt_auth.urls')),
     path('api/category/', include('category.urls')),
-    path('api/subcategory/', include('subcategory.urls')),
 ]

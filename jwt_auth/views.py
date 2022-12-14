@@ -67,7 +67,7 @@ class LoginView(APIView):
 
 class UserListView(APIView):
 
-    def get(self, request):
+    def get(self, _request):
         users = User.objects.all()
         serialized_users = UserSerializer(users, many=True)
         return Response(serialized_users.data)
@@ -105,14 +105,3 @@ class UserDetailView(APIView):
         except Exception as e:
             print('put here', e)
             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-# class UserProfileView(APIView):
-#     def get(self, _request):
-#         try:
-#             user_data = self.request.user
-#             print('here userprofileview')
-#             return Response(user_data)
-#         except Exception as e:
-#             print('here userprofileview')
-#             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
