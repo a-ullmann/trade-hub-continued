@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Card, Col, Row, Container } from 'react-bootstrap'
-import { getToken, getPayload } from '../../helpers/auth'
+import { getToken, getPayload, isOwner } from '../../helpers/auth'
 
 
 
@@ -11,6 +11,7 @@ const ItemSingle = () => {
 
 
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [showDelConfirm, setShowDelConfirm] = useState(false)
   const [isValid, setIsValid] = useState(true)
   const [refresh, setRefresh] = useState(false)
   const [profile, setProfile] = useState()
@@ -23,7 +24,7 @@ const ItemSingle = () => {
 
   const { itemId } = useParams()
   const navigate = useNavigate()
-
+  const defaultImage = 'https://content.optimumnutrition.com/i/on/on-C100969_Image_01?locale=en-gb,*&layer0=$PDP_004$'
 
 
 
@@ -33,7 +34,6 @@ const ItemSingle = () => {
     const getItem = async () => {
       try {
         const { data } = await axios.get(`/api/items/listings/${itemId}/`)
-        console.log(item.id)
         setItem(data)
       } catch (err) {
         setError(err)
@@ -63,8 +63,29 @@ const ItemSingle = () => {
   }, [refresh])
 
 
+  // delete item
 
+  const handleDelete = async () => {
+    setShowDelConfirm(true)
+  }
 
+  const deleteItem = async (e) => {
+    try {
+      e.preventDefault()
+      await axios.delete(`/api/items/listings/${itemId}/`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleKeep = () => {
+    setShowDelConfirm(false)
+  }
 
 
 
@@ -114,34 +135,74 @@ const ItemSingle = () => {
 
 
 
-
   return (
     <main className='single-page'>
-      <Container>
-        <Row>
-          <Col xs={12} md={3}>
-            <div className='item-name'>
-              {item.name}<br />
-            </div>
-          </Col>
-          <Col xs={12} md={3}>
-            <div className='item-price'>
-              ${item.price} <br />
-            </div>
-            <div className='item-duration'>
-              {item.duration} <br /> {item.description}
-            </div>
-            <button onClick={handleBuy}>BUY NOW</button>
-            {showConfirmation && isValid ? <div className='confirmation'>Are you sure you want to purchase this item?
-              <button onClick={handleYes}>Yes</button>
-              <button onClick={handleNo}>No</button>
-            </div>
-              : null
-            }
-            {!isValid ? <div>Wallet balance too low</div> : null}
-          </Col>
-        </Row>
-      </Container>
+      <Row className='justify-content-center'>
+        <div className='item-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+        <div className='item-info'>
+        </div>
+        <div className='item-description'>
+          {item.description}
+        </div>
+      </Row>
+      <Row>
+        <div className='item-name'>
+          {item.name}<br />
+        </div>
+        <div className='item-price'>
+          ${item.price} <br />
+        </div>
+        <div className='buttons-div'>
+          {item.owner && isOwner(item.owner.id) ?
+            <>
+              <p
+                title='WATCH OUT! this deletes the item!'
+                className='item-delete-btn purchase-btn'
+                onClick={handleDelete}>
+                Delete this item.
+              </p>
+              {showDelConfirm ?
+                <>
+                  <div className='purchase-btn' onClick={handleYes}>Yes</div>
+                  <div className='purchase-btn' onClick={handleKeep}>No</div>
+                </>
+                : <div></div>
+              }
+            </>
+            :
+            <>
+              <div className='purchase-btn buy-now' onClick={handleBuy}>BUY NOW</div>
+              {showConfirmation && isValid ? <div className='confirmation'>Are you sure you want to purchase this item?
+                <div className=''>
+                  <div className='purchase-btn' onClick={deleteItem}>Yes</div>
+                  <div className='purchase-btn' onClick={handleNo}>No</div>
+                </div>
+                <div className='calculation'>${profile.wallet.toLocaleString('en-EN', {
+                  useGrouping: true,
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  groupingSeperator: ' ',
+                })} - <span className='item-cost'>${item.price.toLocaleString('en-EN', {
+                  useGrouping: true,
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  groupingSeperator: ' ',
+                })}</span> = ${((profile.wallet) - (item.price)
+                ).toLocaleString('en-EN', {
+                  useGrouping: true,
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                  groupingSeperator: ' ',
+                })}
+                </div>
+              </div>
+                : null
+              }
+            </>
+          }
+          {!isValid ? <div>Wallet balance too low</div> : null}
+        </div>
+      </Row>
     </main>
   )
 }

@@ -17,9 +17,8 @@ const Profile = ({ itemFields, setItemFields }) => {
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
 
-  const defaultImage = ''
+  const defaultImage = 'https://betarill.com/media/images/products/default_product.png'
   const { userId } = useParams()
-
 
 
   // get profile
@@ -43,6 +42,7 @@ const Profile = ({ itemFields, setItemFields }) => {
       try {
         const { data } = await axios.get('/api/items/listings/')
         console.log('dataaaaa', data)
+        console.log('👁', items.buyer ? items.buyer.id : 'nope')
         setItems(data)
       } catch (err) {
         console.log(err)
@@ -101,9 +101,8 @@ const Profile = ({ itemFields, setItemFields }) => {
 
 
 
-
   return (
-    <main>
+    <main className='user-profile'>
       <Container>
         <h2>USER PROFILE</h2>
         <div>
@@ -117,29 +116,42 @@ const Profile = ({ itemFields, setItemFields }) => {
         <button onClick={handleDeposit}>DEPOSIT $$</button>
         <Tabs defaultActiveKey='purchased' id='user-profile-tabs'>
           <Tab eventKey='purchased' title='Purchased'>
-            {items.map(item => {
-              const { name, price, id, duration, owner, buyer } = item
-              return (
-                <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
-                  <Link to={`/${id}`}>
-                    <Card border='primary' style={{ width: '18rem' }} className='items-card'>
+            {items && items
+              .map(item => {
+                const { name, price, id, owner, buyer } = item
+                return (
+                  <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
+                    <Card onClick={() => navigate(`/${id}`)} border='primary' style={{ width: '18rem' }} className='items-card'>
                       <Card.Body>
                         <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
                         <Card.Footer className='items-div'>
-                          {name}, ${price} <br /> owner: {owner.username}, buyer: {buyer}
+                          {name}, ${price} <br /> owner: {owner.username}, buyer: {buyer ? buyer.username : 'no buyer'}
                         </Card.Footer>
                       </Card.Body>
                     </Card>
-                  </Link>
-                </Col>
-              )
-            })}
+                  </Col>
+                )
+              })}
           </Tab>
           <Tab eventKey='listed' title='Listed'>
-
+            {items && items
+              .map(item => {
+                const { name, price, id, owner, buyer } = item
+                return (
+                  <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
+                    <Card onClick={() => navigate(`/${id}`)} border='primary' style={{ width: '18rem' }} className='items-card'>
+                      <Card.Body>
+                        <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+                        <Card.Footer className='items-div'>
+                          {name}, ${price} <br /> owner: {owner.username}, buyer: {buyer ? buyer.username : 'no buyer'}
+                        </Card.Footer>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                )
+              })}
           </Tab>
           <Tab eventKey='create-listing' title='Create Listing'>
-
             <ItemForm
               itemFields={itemFields}
               setItemFields={setItemFields}
@@ -150,9 +162,6 @@ const Profile = ({ itemFields, setItemFields }) => {
       </Container>
     </main>
   )
-
-
-
 }
 
 export default Profile

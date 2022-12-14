@@ -6,3 +6,4 @@ from category.serializers.common import CategorySerializer
 class PopulatedListingsSerializer(ListingsSerializer):
     category = CategorySerializer()
     owner = UserSerializer()
+    buyer = UserSerializer()

@@ -21,7 +21,7 @@ const ImageUpload = ({ itemFields, setItemFields }) => {
 
   return (
     <div>
-      <label>or upload a group image:</label>
+      <label>Image of Item:</label>
       {itemFields.item_image ?
         <img src={itemFields.item_image} alt='item image' />
         :

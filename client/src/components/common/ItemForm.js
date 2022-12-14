@@ -44,27 +44,6 @@ const ItemForm = () => {
   }, [])
 
 
-
-
-
-
-  // const handleDays = (e) => {
-  //   setDays(e.target.value)
-  // }
-
-  // const startCountdown = (e) => {
-  //   const secondsInDay = 86400
-  //   const secondsInHour = 3600
-  //   const totalSeconds = days * secondsInDay + hours * secondsInHour
-  //   setSeconds(totalSeconds)
-
-  //   setInterval(() => {
-  //     setSeconds(seconds => seconds - 1)
-  //   }, 1000)
-  //   console.log('countdown started')
-  // }
-
-
   const handleChange = (e) => {
     console.log('e value =====>', e.target.value)
     console.log('e name =====>', e.target.name)
@@ -82,7 +61,6 @@ const ItemForm = () => {
         },
       })
       setItemFields({ name: '', price: '', duration: '', description: '', profile_image: '', category: '' })
-      // startCountdown()
       navigate(`/${data.id}`)
     } catch (err) {
       console.log(err)
@@ -95,8 +73,10 @@ const ItemForm = () => {
 
 
   return (
-    <Card>
+    <div className='item-form'>
+      <div>Create Your Own Listing</div>
       <form onSubmit={handleSubmit}>
+        <label htmlFor='name'>Name of Item</label>
         <input
           type='text'
           name='name'
@@ -105,6 +85,7 @@ const ItemForm = () => {
           placeholder='Item Name *'
           required
         />
+        <label htmlFor='price'>Price</label>
         <input
           type='number'
           name='price'
@@ -114,21 +95,15 @@ const ItemForm = () => {
           placeholder='Price *'
           required
         />
-        <input
-          type='number'
-          name='duration'
-          onChange={handleChange}
-          value={itemFields.duration}
-          placeholder='Duration *'
-          required
-        />
-        <input
+        <label htmlFor='description'>Description</label>
+        <textarea
           type='text'
           name='description'
           onChange={handleChange}
           value={itemFields.description}
           placeholder='Item Description'
         />
+        <label htmlFor='category'>Select the Category</label>
         <select name='category' onChange={handleChange}>
           {categories.map(category => {
             const { name, id } = category
@@ -144,7 +119,7 @@ const ItemForm = () => {
         />
         <button className='u'>Create Listing</button>
       </form>
-    </Card>
+    </div>
   )
 }
 

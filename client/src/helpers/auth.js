@@ -32,3 +32,9 @@ export const handleLogout = (navigate) => {
   localStorage.removeItem(tokenName)
   navigate('/login')
 }
+
+export const isOwner = (token1) => {
+  const payload = getPayload()
+  if (!payload) return false
+  return token1 === payload.sub
+}

@@ -6,7 +6,7 @@ from django.db import models
 class Listings(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
-    duration = models.IntegerField()
+    duration = models.IntegerField(default=None, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     item_image = models.URLField(
@@ -26,7 +26,7 @@ class Listings(models.Model):
         'jwt_auth.User',
         related_name='bought_listings',
         on_delete=models.CASCADE,
-        default='Jeff',
+        default=None,
         null=True
     )
 
