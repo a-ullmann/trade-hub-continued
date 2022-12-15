@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Listings(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
     price = models.FloatField()
     duration = models.IntegerField(default=None, blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)

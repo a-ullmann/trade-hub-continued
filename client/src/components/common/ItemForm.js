@@ -16,7 +16,6 @@ const ItemForm = () => {
   const [itemFields, setItemFields] = useState({
     name: '',
     price: '',
-    duration: '',
     description: '',
     item_image: '',
     category: '',
@@ -74,7 +73,7 @@ const ItemForm = () => {
 
   return (
     <div className='item-form'>
-      <div>Create Your Own Listing</div>
+      <h1 className='create-listing'>Create Your Own Listing</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='name'>Name of Item</label>
         <input
@@ -105,6 +104,7 @@ const ItemForm = () => {
         />
         <label htmlFor='category'>Select the Category</label>
         <select name='category' onChange={handleChange}>
+          <option>Please select category</option>
           {categories.map(category => {
             const { name, id } = category
             return (
@@ -117,7 +117,7 @@ const ItemForm = () => {
           setItemFields={setItemFields}
           item_image={itemFields.item_image}
         />
-        <button className='u'>Create Listing</button>
+        <button className='create-listing-btn'>Create Listing</button>
       </form>
     </div>
   )

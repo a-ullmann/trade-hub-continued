@@ -15,6 +15,7 @@ const ItemSingle = () => {
   const [isValid, setIsValid] = useState(true)
   const [refresh, setRefresh] = useState(false)
   const [profile, setProfile] = useState()
+  const [ownerProfile, setOwnerProfile] = useState()
   const [item, setItem] = useState([])
   const [error, setError] = useState(false)
   const [userId] = useState(() => {
@@ -62,6 +63,22 @@ const ItemSingle = () => {
     getProfile()
   }, [refresh])
 
+
+  // get owner profile
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        console.log('owner profile??')
+        const response = await axios.get(`/api/auth/users/${item.owner.id}/`)
+        setOwnerProfile(response.data)
+        console.log('get owner profile response ==>', response.data)
+      } catch (err) {
+        console.log(err.message)
+        setError(err)
+      }
+    }
+    getProfile()
+  }, [])
 
   // delete item
 
@@ -146,27 +163,24 @@ const ItemSingle = () => {
         </div>
       </Row>
       <Row>
-        <div className='item-name'>
-          {item.name}<br />
-        </div>
-        <div className='item-price'>
-          ${item.price} <br />
-        </div>
+        <div className='item-name'>{item.name}</div>
+        <div className='item-owner'>{profile && profile.username}</div>
+        <div className='item-price'>${item.price}</div>
         <div className='buttons-div'>
           {item.owner && isOwner(item.owner.id) ?
             <>
+              <p>You own this item.</p>
               <p
                 title='WATCH OUT! this deletes the item!'
                 className='item-delete-btn purchase-btn'
                 onClick={handleDelete}>
                 Delete this item.
               </p>
-              {showDelConfirm ?
+              {showDelConfirm &&
                 <>
-                  <div className='purchase-btn' onClick={handleYes}>Yes</div>
+                  <div className='purchase-btn' onClick={deleteItem}>Yes</div>
                   <div className='purchase-btn' onClick={handleKeep}>No</div>
                 </>
-                : <div></div>
               }
             </>
             :
@@ -174,7 +188,7 @@ const ItemSingle = () => {
               <div className='purchase-btn buy-now' onClick={handleBuy}>BUY NOW</div>
               {showConfirmation && isValid ? <div className='confirmation'>Are you sure you want to purchase this item?
                 <div className=''>
-                  <div className='purchase-btn' onClick={deleteItem}>Yes</div>
+                  <div className='purchase-btn' onClick={handleYes}>Yes</div>
                   <div className='purchase-btn' onClick={handleNo}>No</div>
                 </div>
                 <div className='calculation'>${profile.wallet.toLocaleString('en-EN', {

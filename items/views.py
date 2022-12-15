@@ -30,8 +30,10 @@ class ListingsListView(APIView):
                       listing_to_add.validated_data)
                 listing_to_add.save()
                 return Response(listing_to_add.data, status.HTTP_201_CREATED)
+            print(listing_to_add.errors)
             return Response(listing_to_add.errors, status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
+            print(e)
             return Response(str(e), status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

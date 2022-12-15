@@ -13,6 +13,10 @@ const Profile = ({ itemFields, setItemFields }) => {
 
   const [items, setItems] = useState([])
   const [profile, setProfile] = useState()
+  const [showDeposit, setShowDeposit] = useState(false)
+  const [depositAmount, setDepositAmount] = useState({
+    amount: '',
+  })
   const [error, setError] = useState(false)
   const [refresh, setRefresh] = useState(false)
   const navigate = useNavigate()
@@ -54,21 +58,30 @@ const Profile = ({ itemFields, setItemFields }) => {
 
 
   // handle deposit
-  const handleDeposit = async () => {
+  const handleDeposit = () => {
+    setShowDeposit(true)
+  }
+
+  const handleNoDeposit = () => {
+    setShowDeposit(false)
+  }
+
+  const handleChange = (e) => {
+    setDepositAmount({ amount: parseFloat(e.target.value) })
+  }
+
+  const handleAmount = async () => {
     try {
       const updatedWallet = {
         ...profile,
-        wallet: profile.wallet + 1000,
+        wallet: profile.wallet + depositAmount.amount,
       }
       await axios.put(`/api/auth/users/${userId}/`, updatedWallet, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       })
-      console.log('profile ==>', profile)
-      console.log('wallet ==>', profile.wallet)
       setRefresh(true)
-      // setProfile(updatedWallet)
     } catch (err) {
       if (error) setError('')
     }
@@ -81,73 +94,99 @@ const Profile = ({ itemFields, setItemFields }) => {
 
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      await axios.patch(`/api/profile/${userId}/`, profile, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-
-
-
-
-
-
 
   return (
     <main className='user-profile'>
       <Container>
-        <h2>USER PROFILE</h2>
-        <div>
-          {profile &&
-            <>
-              <h2>{profile.username}</h2>
-              <div>$ {profile.wallet}</div>
-            </>
-          }
-        </div>
-        <button onClick={handleDeposit}>DEPOSIT $$</button>
-        <Tabs defaultActiveKey='purchased' id='user-profile-tabs'>
+        <section className='profile-hero-image'>
+          <div className='profile-hero-text'>
+            <div>
+              {profile &&
+                <>
+                  <h2>{profile.username}</h2>
+                  <div>$ {profile.wallet.toLocaleString('en-EN', {
+                    useGrouping: true,
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    groupingSeperator: ' ',
+                  })}
+                  </div>
+                </>
+              }
+            </div>
+          </div>
+        </section>
+        <Tabs className='profile-tabs' defaultActiveKey='purchased' id='user-profile-tabs'>
           <Tab eventKey='purchased' title='Purchased'>
             {items && items
+              // .filter(item => {
+              //   return item.buyer.username === profile.username
+              // })
+              // buyer name === profile name
               .map(item => {
                 const { name, price, id, owner, buyer } = item
                 return (
-                  <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
-                    <Card onClick={() => navigate(`/${id}`)} border='primary' style={{ width: '18rem' }} className='items-card'>
-                      <Card.Body>
-                        <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
-                        <Card.Footer className='items-div'>
-                          {name}, ${price} <br /> owner: {owner.username}, buyer: {buyer ? buyer.username : 'no buyer'}
-                        </Card.Footer>
-                      </Card.Body>
-                    </Card>
-                  </Col>
+                  <Row key={id}>
+                    <Col sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
+                      <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='items-card'>
+                        <Card.Body>
+                          <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+                          <Card.Footer className='items-div'>
+                            <div className='card-name'>
+                              <div>{name}</div>
+                              {/* <div>{buyer}</div> */}
+                              <div className='item-price'>${price.toLocaleString('en-EN', {
+                                useGrouping: true,
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                                groupingSeperator: ' ',
+                              })}
+                              </div>
+                            </div>
+                            <div className='owned-by'>
+                              <p>owned by: {owner.username}</p>
+                            </div>
+                          </Card.Footer>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
                 )
               })}
           </Tab>
           <Tab eventKey='listed' title='Listed'>
             {items && items
+              // .filter(item => {
+              //   return buyer.username === profile.username
+              // })
+              // owner name === profile name && (buyer === no buyer)
               .map(item => {
                 const { name, price, id, owner, buyer } = item
                 return (
-                  <Col key={id} sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
-                    <Card onClick={() => navigate(`/${id}`)} border='primary' style={{ width: '18rem' }} className='items-card'>
-                      <Card.Body>
-                        <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
-                        <Card.Footer className='items-div'>
-                          {name}, ${price} <br /> owner: {owner.username}, buyer: {buyer ? buyer.username : 'no buyer'}
-                        </Card.Footer>
-                      </Card.Body>
-                    </Card>
-                  </Col>
+                  <Row key={id}>
+                    <Col sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
+                      <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='items-card'>
+                        <Card.Body>
+                          <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+                          <Card.Footer className='items-div'>
+                            <div className='card-name'>
+                              <div>{name}</div>
+                              <div className='item-price'>${price.toLocaleString('en-EN', {
+                                useGrouping: true,
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                                groupingSeperator: ' ',
+                              })}
+                              </div>
+                            </div>
+                            <div className='owned-by'>
+                              <p>owned by: {owner.username}</p>
+                            </div>
+                          </Card.Footer>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
                 )
               })}
           </Tab>
@@ -157,6 +196,19 @@ const Profile = ({ itemFields, setItemFields }) => {
               setItemFields={setItemFields}
               items={items}
             />
+          </Tab>
+          <Tab eventKey='wire-transfer' title='Wire Transfer'>
+            <button onClick={handleDeposit}>Wire-transfer $$</button>
+            {showDeposit &&
+              <>
+                <form>
+                  <label htmlFor='amount'>Enter the amount you would like to deposit:</label>
+                  <input name='amount' type='number' onChange={handleChange} value={depositAmount.amount}></input>
+                  <button onClick={handleAmount}>Deposit</button>
+                  <button onClick={handleNoDeposit}>Back</button>
+                </form>
+              </>
+            }
           </Tab>
         </Tabs>
       </Container>
