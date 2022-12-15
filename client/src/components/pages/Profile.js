@@ -12,6 +12,8 @@ const Profile = ({ itemFields, setItemFields }) => {
 
 
   const [items, setItems] = useState([])
+  const [listings, setListings] = useState([])
+  const [purchases, setPurchases] = useState([])
   const [profile, setProfile] = useState()
   const [showDeposit, setShowDeposit] = useState(false)
   const [depositAmount, setDepositAmount] = useState({
@@ -46,7 +48,6 @@ const Profile = ({ itemFields, setItemFields }) => {
       try {
         const { data } = await axios.get('/api/items/listings/')
         console.log('dataaaaa', data)
-        console.log('👁', items.buyer ? items.buyer.id : 'nope')
         setItems(data)
       } catch (err) {
         console.log(err)
@@ -55,6 +56,39 @@ const Profile = ({ itemFields, setItemFields }) => {
     }
     getData()
   }, [])
+
+
+  // get listings
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`/api/items/listed/user/${userId}/`)
+        setListings(data)
+      } catch (err) {
+        setError(err)
+      }
+    }
+    getData()
+  }, [])
+
+  // get purchases
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`/api/items/purchased/user/${userId}/`)
+        setPurchases(data)
+      } catch (err) {
+        setError(err)
+      }
+    }
+    getData()
+  }, [])
+
+
+
+
+
+
 
 
   // handle deposit
@@ -103,7 +137,7 @@ const Profile = ({ itemFields, setItemFields }) => {
             <div>
               {profile &&
                 <>
-                  <h2>{profile.username}</h2>
+                  <h1>{profile.username}</h1>
                   <div>$ {profile.wallet.toLocaleString('en-EN', {
                     useGrouping: true,
                     minimumFractionDigits: 2,
@@ -117,55 +151,14 @@ const Profile = ({ itemFields, setItemFields }) => {
           </div>
         </section>
         <Tabs className='profile-tabs' defaultActiveKey='purchased' id='user-profile-tabs'>
-          <Tab eventKey='purchased' title='Purchased'>
-            {items && items
-              // .filter(item => {
-              //   return item.buyer.username === profile.username
-              // })
-              // buyer name === profile name
-              .map(item => {
-                const { name, price, id, owner, buyer } = item
-                return (
-                  <Row key={id}>
-                    <Col sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
-                      <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='items-card'>
-                        <Card.Body>
-                          <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
-                          <Card.Footer className='items-div'>
-                            <div className='card-name'>
-                              <div>{name}</div>
-                              {/* <div>{buyer}</div> */}
-                              <div className='item-price'>${price.toLocaleString('en-EN', {
-                                useGrouping: true,
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                                groupingSeperator: ' ',
-                              })}
-                              </div>
-                            </div>
-                            <div className='owned-by'>
-                              <p>owned by: {owner.username}</p>
-                            </div>
-                          </Card.Footer>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  </Row>
-                )
-              })}
-          </Tab>
-          <Tab eventKey='listed' title='Listed'>
-            {items && items
-              // .filter(item => {
-              //   return buyer.username === profile.username
-              // })
-              // owner name === profile name && (buyer === no buyer)
-              .map(item => {
-                const { name, price, id, owner, buyer } = item
-                return (
-                  <Row key={id}>
-                    <Col sm={6} md={4} lg={3} xl={3} className='m-3 items-col'>
-                      <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='items-card'>
+          <Tab eventKey='purchased' title='Purchased' className='profile-tab'>
+            <Col className='items-col'>
+              {purchases && purchases
+                .map(item => {
+                  const { name, price, id, owner, buyer } = item
+                  return (
+                    <Row key={id} xs={7} sm={6} md={5} lg={4} xl={3}>
+                      <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='mt-3 items-card'>
                         <Card.Body>
                           <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
                           <Card.Footer className='items-div'>
@@ -180,24 +173,57 @@ const Profile = ({ itemFields, setItemFields }) => {
                               </div>
                             </div>
                             <div className='owned-by'>
-                              <p>owned by: {owner.username}</p>
+                              <p>seller: {owner.username}</p> <br />
+                              <p>buyer: {buyer.username}</p>
                             </div>
                           </Card.Footer>
                         </Card.Body>
                       </Card>
-                    </Col>
-                  </Row>
-                )
-              })}
+                    </Row>
+                  )
+                })}
+            </Col>
           </Tab>
-          <Tab eventKey='create-listing' title='Create Listing'>
+          <Tab eventKey='listed' title='Listed' className='profile-tab'>
+            <Col className='items-col'>
+              {listings && listings
+                .map(item => {
+                  const { name, price, id, owner, buyer } = item
+                  return (
+                    <Row key={id} xs={7} sm={6} md={5} lg={4} xl={3}>
+                      <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='mt-3 items-card'>
+                        <Card.Body>
+                          <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+                          <Card.Footer className='items-div'>
+                            <div className='card-name'>
+                              <div>{name}</div>
+                              <div className='item-price'>${price.toLocaleString('en-EN', {
+                                useGrouping: true,
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                                groupingSeperator: ' ',
+                              })}
+                              </div>
+                            </div>
+                            <div className='owned-by'>
+                              <p>seller: {owner.username}</p>
+                            </div>
+                          </Card.Footer>
+                        </Card.Body>
+                      </Card>
+                    </Row>
+                  )
+                })}
+            </Col>
+          </Tab>
+          <Tab eventKey='create-listing' title='Create Listing' className='profile-tab'>
             <ItemForm
               itemFields={itemFields}
               setItemFields={setItemFields}
               items={items}
             />
           </Tab>
-          <Tab eventKey='wire-transfer' title='Wire Transfer'>
+          <Tab eventKey='wire-transfer' title='Deposit Cash' className='profile-tab'>
             <button onClick={handleDeposit}>Wire-transfer $$</button>
             {showDeposit &&
               <>

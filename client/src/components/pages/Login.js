@@ -2,7 +2,6 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setToken } from '../../helpers/auth'
-import flower from '../../assets/flower-blossom-minimal-black.jpeg'
 
 
 
@@ -40,9 +39,9 @@ const Login = () => {
 
   return (
     <main className='auth-pages'>
-      <div className='auth-hero' style={{ backgroundImage: `url(${flower})` }}>
+      {/* <div className='auth-hero' style={{ backgroundImage: `url(${#})` }}></div> */}
 
-      </div>
+
       <div>
         <h1>LOGIN</h1>
         <p>Don&apos;t have an account? <span className='login-here' onClick={() => (navigate('/register'))}>Register here.</span></p>
@@ -69,7 +68,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </main>
+    </main >
   )
 
 }

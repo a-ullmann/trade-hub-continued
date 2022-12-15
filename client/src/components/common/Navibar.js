@@ -37,7 +37,7 @@ const Navibar = () => {
     return () => {
       document.removeEventListener('click', handleClick)
     }
-  }, [isDropdownVisible])
+  }, [search, isDropdownVisible])
 
   const handleFocus = () => {
     setIsDropdownVisible(true)
@@ -88,9 +88,9 @@ const Navibar = () => {
           {isDropdownVisible && searchResults.length > 0 && (
             <div className='search-dropdown'>
               {searchResults.map((result) => (
-                <Link key={result.id} to={`${result.id}`} className='text-decoration-none' onClick={handleClickItem}>
-                  <ul className='search-dropdown-item' >{result.name}</ul>
-                </Link>
+                <div key={result.id} className='text-decoration-none' onClick={handleClickItem}>
+                  <ul onClick={() => navigate(`${result.id}`)} className='search-dropdown-item'>{result.name}</ul>
+                </div>
               ))}
             </div>
           )}
@@ -98,13 +98,13 @@ const Navibar = () => {
         <div className='nav-items'>
           {isAuthenticated() ?
             <>
-              <Nav.Link as={Link} to={`/users/${userId}`}>Profile</Nav.Link>
-              <span onClick={() => handleLogout(navigate)}>Logout</span>
+              <Nav.Link as={Link} to={`/users/${userId}`} className='navbar-link'>Profile</Nav.Link>
+              <span onClick={() => handleLogout(navigate)} className='navbar-link'>Logout</span>
             </>
             :
             <>
-              <Nav.Link as={Link} to='/login'>Login</Nav.Link>
-              <Nav.Link as={Link} to='/register'>Register</Nav.Link>
+              <Nav.Link as={Link} to='/login' className='navbar-link'>Login</Nav.Link>
+              <Nav.Link as={Link} to='/register' className='navbar-link'>Register</Nav.Link>
             </>
           }
         </div>

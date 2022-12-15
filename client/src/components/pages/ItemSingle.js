@@ -80,8 +80,8 @@ const ItemSingle = () => {
     getProfile()
   }, [])
 
-  // delete item
 
+  // delete item
   const handleDelete = async () => {
     setShowDelConfirm(true)
   }
@@ -164,7 +164,7 @@ const ItemSingle = () => {
       </Row>
       <Row>
         <div className='item-name'>{item.name}</div>
-        <div className='item-owner'>{profile && profile.username}</div>
+        <div className='item-owner'>seller: <span>{profile && profile.username}</span></div>
         <div className='item-price'>${item.price}</div>
         <div className='buttons-div'>
           {item.owner && isOwner(item.owner.id) ?
@@ -185,33 +185,40 @@ const ItemSingle = () => {
             </>
             :
             <>
-              <div className='purchase-btn buy-now' onClick={handleBuy}>BUY NOW</div>
-              {showConfirmation && isValid ? <div className='confirmation'>Are you sure you want to purchase this item?
-                <div className=''>
-                  <div className='purchase-btn' onClick={handleYes}>Yes</div>
-                  <div className='purchase-btn' onClick={handleNo}>No</div>
-                </div>
-                <div className='calculation'>${profile.wallet.toLocaleString('en-EN', {
-                  useGrouping: true,
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  groupingSeperator: ' ',
-                })} - <span className='item-cost'>${item.price.toLocaleString('en-EN', {
-                  useGrouping: true,
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  groupingSeperator: ' ',
-                })}</span> = ${((profile.wallet) - (item.price)
-                ).toLocaleString('en-EN', {
-                  useGrouping: true,
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                  groupingSeperator: ' ',
-                })}
-                </div>
+              <div className='purchase-div'>
+                <div className='purchase-btn buy-now' onClick={handleBuy}>BUY NOW</div>
+                {showConfirmation && isValid ?
+                  <div className='confirmation'>
+                    <p>Are you sure you want to purchase this item?</p>
+                    <div className='confirmation-btns'>
+                      <div className='purchase-btn' onClick={handleYes}>Yes</div>
+                      <div className='purchase-btn' onClick={handleNo}>No</div>
+                    </div>
+                    <div className='calculation'>
+                      <p>Your Balance after this purchase:</p>
+                      <div>${profile.wallet.toLocaleString('en-EN', {
+                        useGrouping: true,
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                        groupingSeperator: ' ',
+                      })} - <span className='item-cost'>${item.price.toLocaleString('en-EN', {
+                        useGrouping: true,
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                        groupingSeperator: ' ',
+                      })}</span> = <span className='display-4'>${((profile.wallet) - (item.price)
+                      ).toLocaleString('en-EN', {
+                        useGrouping: true,
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                        groupingSeperator: ' ',
+                      })}</span>
+                      </div>
+                    </div>
+                  </div>
+                  : null
+                }
               </div>
-                : null
-              }
             </>
           }
           {!isValid ? <div>Wallet balance too low</div> : null}

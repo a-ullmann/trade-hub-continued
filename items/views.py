@@ -11,11 +11,9 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ListingsListView(APIView):
-    # permission_classes = (IsAuthenticated, )
 
     def get(self, request):
-        listings = Listings.objects.all()
-        # print('listings =>', listings)
+        listings = Listings.objects.filter(buyer=None)
         serialized_listings = PopulatedListingsSerializer(listings, many=True)
         return Response(serialized_listings.data)
 
@@ -46,7 +44,6 @@ class ListingsSearchView(generics.ListAPIView):
 
 
 class ListingsDetailView(APIView):
-    # permission_classes = (IsAuthenticated, )
 
     def get_listings(self, pk):
         try:
@@ -81,3 +78,25 @@ class ListingsDetailView(APIView):
         listings = self.get_listings(pk)
         listings.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class PurchasedView(APIView):
+    def get(self, _request, pk):
+        try:
+            items_purchased = Listings.objects.filter(buyer=pk)
+            serialized_purchases = PopulatedListingsSerializer(
+                items_purchased, many=True)
+            return Response(serialized_purchases.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ListedView(APIView):
+    def get(self, _request, pk):
+        try:
+            items_listed = Listings.objects.filter(owner=pk, buyer=None)
+            serialized_listings = PopulatedListingsSerializer(
+                items_listed, many=True)
+            return Response(serialized_listings.data)
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)

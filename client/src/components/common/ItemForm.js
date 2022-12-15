@@ -44,8 +44,6 @@ const ItemForm = () => {
 
 
   const handleChange = (e) => {
-    console.log('e value =====>', e.target.value)
-    console.log('e name =====>', e.target.name)
     setItemFields({ ...itemFields, [e.target.name]: e.target.value })
     if (error) setError(true)
   }
@@ -75,7 +73,7 @@ const ItemForm = () => {
     <div className='item-form'>
       <h1 className='create-listing'>Create Your Own Listing</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='name'>Name of Item</label>
+        <label htmlFor='name'>Name of Item:</label>
         <input
           type='text'
           name='name'
@@ -84,7 +82,7 @@ const ItemForm = () => {
           placeholder='Item Name *'
           required
         />
-        <label htmlFor='price'>Price</label>
+        <label htmlFor='price'>Price:</label>
         <input
           type='number'
           name='price'
@@ -94,7 +92,7 @@ const ItemForm = () => {
           placeholder='Price *'
           required
         />
-        <label htmlFor='description'>Description</label>
+        <label htmlFor='description'>Description:</label>
         <textarea
           type='text'
           name='description'
@@ -102,9 +100,9 @@ const ItemForm = () => {
           value={itemFields.description}
           placeholder='Item Description'
         />
-        <label htmlFor='category'>Select the Category</label>
-        <select name='category' onChange={handleChange}>
-          <option>Please select category</option>
+        <label htmlFor='category'>Select the Category:</label>
+        <select className='category-select' name='category' onChange={handleChange}>
+          <option>Please select a category *</option>
           {categories.map(category => {
             const { name, id } = category
             return (
