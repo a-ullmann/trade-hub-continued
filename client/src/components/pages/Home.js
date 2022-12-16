@@ -44,7 +44,7 @@ const ItemIndex = () => {
           <h1>T R A D E &nbsp; &nbsp; H U B</h1>
           <h5 className='trust'>Your trusted Marketplace</h5>
           {!isAuthenticated() &&
-            <button onClick={() => navigate('/register')} className='hero-btn'>Join us</button>
+            <button onClick={() => navigate('/register/')} className='hero-btn'>Join us</button>
           }
         </div>
       </section>

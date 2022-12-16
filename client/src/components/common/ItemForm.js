@@ -31,7 +31,7 @@ const ItemForm = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get('/api/category')
+        const { data } = await axios.get('/api/category/')
         setCategories(data)
       } catch (err) {
         console.log(err)
