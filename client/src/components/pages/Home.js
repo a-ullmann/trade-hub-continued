@@ -82,7 +82,7 @@ const ItemIndex = () => {
             })}
           </Row>
           :
-          error ? <h2>Something is wrong, please try again later...</h2> : <p> loading...</p>
+          error ? <h2>Something is wrong, please try again later...</h2> : <p>No listed items yet...</p>
         }
       </Container>
     </main >

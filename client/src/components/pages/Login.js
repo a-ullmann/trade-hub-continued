@@ -27,11 +27,9 @@ const Login = () => {
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/auth/login/', formFields)
-      console.log(data)
       setToken(data.token)
       navigate('/')
     } catch (err) {
-      console.log('error', err.response.data.detail)
       setError(err.response.data.detail)
     }
   }
@@ -64,7 +62,7 @@ const Login = () => {
               required
             />
             {error && <small className='text-danger'>{error}</small>}
-            <button>Log in</button>
+            <button className='uni-btn'>Log in</button>
           </form>
         </div>
       </div>

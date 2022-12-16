@@ -33,9 +33,7 @@ const Profile = ({ itemFields, setItemFields }) => {
       try {
         const response = await axios.get(`/api/auth/users/${userId}/`)
         setProfile(response.data)
-        console.log('get profile response ==>', response.data)
       } catch (err) {
-        console.log(err.message)
         setError(err)
       }
     }
@@ -47,7 +45,6 @@ const Profile = ({ itemFields, setItemFields }) => {
     const getData = async () => {
       try {
         const { data } = await axios.get('/api/items/listings/')
-        console.log('dataaaaa', data)
         setItems(data)
       } catch (err) {
         console.log(err)
@@ -137,7 +134,7 @@ const Profile = ({ itemFields, setItemFields }) => {
             <div>
               {profile &&
                 <>
-                  <h1>{profile.username}</h1>
+                  <h1 className='username-hero'>{profile.username}</h1>
                   <div>$ {profile.wallet.toLocaleString('en-EN', {
                     useGrouping: true,
                     minimumFractionDigits: 2,

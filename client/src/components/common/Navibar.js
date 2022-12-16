@@ -55,7 +55,6 @@ const Navibar = () => {
     e.preventDefault()
     try {
       const { data } = await axios.get(`/api/items/${search}/`)
-      console.log('data from search', data)
       setSearchResults(data)
     } catch (err) {
       console.log(err)

@@ -32,7 +32,6 @@ const ItemForm = () => {
     const getData = async () => {
       try {
         const { data } = await axios.get('/api/category')
-        console.log('categories 👍🏼 ==>', categories)
         setCategories(data)
       } catch (err) {
         console.log(err)
@@ -60,8 +59,6 @@ const ItemForm = () => {
       setItemFields({ name: '', price: '', duration: '', description: '', profile_image: '', category: '' })
       navigate(`/${data.id}`)
     } catch (err) {
-      console.log(err)
-      console.log(err.message ? err.message : err.response.data.message)
       setError(err.message ? err.message : err.response.data.message)
     }
   }

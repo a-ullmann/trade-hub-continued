@@ -25,7 +25,6 @@ const Register = () => {
       await axios.post('/api/auth/register/', formFields)
       navigate('/login')
     } catch (err) {
-      console.log(err.response.data.password_confirmation[0])
       setError(err.response.data.message)
     }
   }
@@ -102,7 +101,7 @@ const Register = () => {
           value={formFields.wallet}
         />
         {error && <small className='text-danger'>{error}</small>}
-        <button className='uni-btn-primary mt-5 mb-4'>Register</button>
+        <button className='uni-btn mt-5 mb-4'>Register</button>
       </form>
     </main>
   )

@@ -16,7 +16,6 @@ const Filter = ({ items, setFilteredItems }) => {
     const getData = async () => {
       try {
         const { data } = await axios.get('/api/category')
-        console.log('categories 👍🏼 ==>', categories)
         setCategories(data)
       } catch (err) {
         console.log(err)
@@ -36,7 +35,6 @@ const Filter = ({ items, setFilteredItems }) => {
 
   const handleChange = (e) => {
     setFilter({ category: parseInt(e.target.value) })
-    console.log('this is from filer ==>=>', filter)
   }
 
   return (

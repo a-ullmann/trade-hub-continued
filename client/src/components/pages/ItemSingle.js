@@ -54,7 +54,6 @@ const ItemSingle = () => {
       try {
         const response = await axios.get(`/api/auth/users/${userId}/`)
         setProfile(response.data)
-        console.log('get profile response ==>', response.data)
       } catch (err) {
         console.log(err.message)
         setError(err)
@@ -68,10 +67,8 @@ const ItemSingle = () => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        console.log('owner profile??')
         const response = await axios.get(`/api/auth/users/${item.owner.id}/`)
         setOwnerProfile(response.data)
-        console.log('get owner profile response ==>', response.data)
       } catch (err) {
         console.log(err.message)
         setError(err)
@@ -119,8 +116,6 @@ const ItemSingle = () => {
           ...profile,
           wallet: profile.wallet - item.price,
         }
-        console.log('profile ==>', profile)
-        console.log('wallet ==>', profile.wallet)
         await axios.put(`/api/auth/users/${userId}/`, updateProfile, {
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -133,7 +128,6 @@ const ItemSingle = () => {
           buyer: userId,
         }
         await axios.put(`/api/items/listings/${item.id}/`, updateItem)
-        console.log('item after purchase 👄 ==>', updateItem)
         setRefresh(true)
         navigate(`/users/${userId}/`)
       } catch (err) {
