@@ -1,0 +1,332 @@
+[
+{
+  "model": "items.listings",
+  "pk": 1,
+  "fields": {
+    "name": "Wireless Headphones",
+    "price": 59.99,
+    "duration": null,
+    "description": "High quality Bluetooth headphones with comfortable design for hours of listening.",
+    "created_at": "2022-12-16T01:08:34.084Z",
+    "item_image": "https://m.media-amazon.com/images/I/41Ph2zIeD1L._AC_.jpg",
+    "category": 1,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 2,
+  "fields": {
+    "name": "Smart TV",
+    "price": 499.99,
+    "duration": null,
+    "description": "Ultra HD smart TV with built-in streaming apps for all your favorite shows and movies.",
+    "created_at": "2022-12-16T01:10:30.965Z",
+    "item_image": "https://www.homeandsmart.de/var/site/storage/images/_aliases/fixed_col_8/8/8/9/1/401988-1-ger-DE/philips-android-tv.jpg",
+    "category": 1,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 3,
+  "fields": {
+    "name": "Women's Dress",
+    "price": 39.99,
+    "duration": null,
+    "description": "Elegant knee-length dress with lace detailing and a flattering fit.",
+    "created_at": "2022-12-16T01:11:45.151Z",
+    "item_image": "https://media.venus.com/media/web/landing/clothing/20221201/a-mobile.jpg",
+    "category": 2,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 4,
+  "fields": {
+    "name": "Men's T-shirt",
+    "price": 24.99,
+    "duration": null,
+    "description": "Soft cotton t-shirt with a classic fit and a variety of colors and sizes.",
+    "created_at": "2022-12-16T01:12:54.745Z",
+    "item_image": "https://musterag.com/137-medium_default/men-tshirt-circles-design.jpg",
+    "category": 2,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 5,
+  "fields": {
+    "name": "Outdoor Patio Furniture Set",
+    "price": 499.99,
+    "duration": null,
+    "description": "Durable outdoor furniture set with a table, four chairs and cushions for added comfort.",
+    "created_at": "2022-12-16T01:13:45.728Z",
+    "item_image": "https://m.media-amazon.com/images/I/81icFFt0RXL.jpg",
+    "category": 2,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 6,
+  "fields": {
+    "name": "Outdoor Patio Furniture Set",
+    "price": 499.99,
+    "duration": null,
+    "description": "Durable outdoor furniture set with a table, four chairs and cushions for added comfort.",
+    "created_at": "2022-12-16T01:14:03.076Z",
+    "item_image": "https://m.media-amazon.com/images/I/81icFFt0RXL.jpg",
+    "category": 3,
+    "owner": 2,
+    "buyer": 3
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 7,
+  "fields": {
+    "name": "Indoor Plant",
+    "price": 19.99,
+    "duration": null,
+    "description": "Low-maintenance indoor plant with colorful foliage and an easy-care pot.",
+    "created_at": "2022-12-16T01:15:27.664Z",
+    "item_image": "https://i.pinimg.com/564x/b1/87/05/b1870562ead42c89ec8e99ea1acb5179.jpg",
+    "category": 3,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 8,
+  "fields": {
+    "name": "Remote Control Car",
+    "price": 40.0,
+    "duration": null,
+    "description": "High-speed remote control car with realistic lights and sound effects for hours of fun.",
+    "created_at": "2022-12-16T01:16:24.270Z",
+    "item_image": "https://kdvr.com/wp-content/uploads/sites/11/2022/09/9-best-remote-control-cars-78853d.jpg?w=900",
+    "category": 4,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 9,
+  "fields": {
+    "name": "The Board Game",
+    "price": 30.0,
+    "duration": null,
+    "description": "Strategy board game with multiple levels of difficulty and replayability for 2-4 players.",
+    "created_at": "2022-12-16T01:17:41.438Z",
+    "item_image": "https://miro.medium.com/max/1400/1*r_rq_fRLNliX91GSgMi38Q.jpeg",
+    "category": 4,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 10,
+  "fields": {
+    "name": "Tennis Racquet",
+    "price": 99.99,
+    "duration": null,
+    "description": "High-performance tennis racquet with an ergonomic design and lightweight construction.",
+    "created_at": "2022-12-16T01:18:40.869Z",
+    "item_image": "https://i0.wp.com/www.lovetennisblog.com/wp-content/uploads/2021/01/20200718_160342-scaled.jpg?fit=2560%2C1472&ssl=1",
+    "category": 5,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 11,
+  "fields": {
+    "name": "Hiking Backpack",
+    "price": 119.99,
+    "duration": null,
+    "description": "Durable and waterproof hiking backpack with multiple pockets and adjustable straps for all-day comfort.",
+    "created_at": "2022-12-16T01:19:31.064Z",
+    "item_image": "https://m.media-amazon.com/images/I/71WQLa0EnPL._AC_UY1000_.jpg",
+    "category": 5,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 12,
+  "fields": {
+    "name": "Special Shampoo",
+    "price": 10.0,
+    "duration": null,
+    "description": "A nourishing shampoo for all hair types",
+    "created_at": "2022-12-16T01:37:17.874Z",
+    "item_image": "https://i.makeupstore.at/h/hq/hqybilzq4mhc.jpg",
+    "category": 6,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 13,
+  "fields": {
+    "name": "Moisturizer",
+    "price": 15.0,
+    "duration": null,
+    "description": "A light-weight facial moisturizer for all skin types",
+    "created_at": "2022-12-16T01:37:58.312Z",
+    "item_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJhRQfXj_orAvTKdP3nPBXE8EL8BwXzbRaQQ&usqp=CAU",
+    "category": 6,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 14,
+  "fields": {
+    "name": "Couch",
+    "price": 500.0,
+    "duration": null,
+    "description": "A plush, comfortable 3-seater sofa",
+    "created_at": "2022-12-16T01:38:43.353Z",
+    "item_image": "https://www.allnatura.at/bild/configurator/data/product/10/_cache/_lg/1_3__2_4__1_3_20__3_20.jpg",
+    "category": 7,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 15,
+  "fields": {
+    "name": "Side Table",
+    "price": 70.0,
+    "duration": null,
+    "description": "A modern and minimalist side table",
+    "created_at": "2022-12-16T01:39:36.382Z",
+    "item_image": "https://www.ikea.com/us/en/images/products/listerby-side-table-oak-veneer__1022555_pe832813_s5.jpg",
+    "category": 7,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 16,
+  "fields": {
+    "name": "Scary Novel",
+    "price": 18.0,
+    "duration": null,
+    "description": "New York Times Bestseller",
+    "created_at": "2022-12-16T01:41:01.563Z",
+    "item_image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1652100161-3178if2aHgL._SL500_.jpg",
+    "category": 8,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 17,
+  "fields": {
+    "name": "Top Gun",
+    "price": 25.0,
+    "duration": null,
+    "description": "popular blockbuster movie",
+    "created_at": "2022-12-16T01:41:53.061Z",
+    "item_image": "https://cdn.shopify.com/s/files/1/0048/9357/3235/files/top-gun-movie_large.jpg?v=1539629149g",
+    "category": 8,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 18,
+  "fields": {
+    "name": "Bananas",
+    "price": 2.0,
+    "duration": null,
+    "description": "Organic, fair-trade bananas from Ecuador",
+    "created_at": "2022-12-16T01:42:41.458Z",
+    "item_image": "https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bananas-218094b-scaled.jpg",
+    "category": 9,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 19,
+  "fields": {
+    "name": "Cheddar",
+    "price": 9.0,
+    "duration": null,
+    "description": "Aged cheddar cheese from Wisconsin",
+    "created_at": "2022-12-16T01:43:51.506Z",
+    "item_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFaYOBzRqEeA5aGb4BiTKX0V0PfgtVczIps2FaleUmprMqCQlfZR96EdK-ZhBbpPCmHVs&usqp=CAU",
+    "category": 9,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 20,
+  "fields": {
+    "name": "All-season tires",
+    "price": 119.0,
+    "duration": null,
+    "description": "A set of all-season tires for a mid-sized car",
+    "created_at": "2022-12-16T01:45:16.336Z",
+    "item_image": "https://i5.walmartimages.com/asr/5f1f5f87-8ecb-4846-af12-a8d3f85110b4_1.727a1269530847afaa2d82eeb9678250.jpeg",
+    "category": 10,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 21,
+  "fields": {
+    "name": "Oil Filter",
+    "price": 22.0,
+    "duration": null,
+    "description": "A high-performance oil filter for a mid-sized car",
+    "created_at": "2022-12-16T01:46:31.070Z",
+    "item_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShuIE4p7eaL2vXf_ENSOBAX7-BMf6YljVJZw&usqp=CAU",
+    "category": 10,
+    "owner": 2,
+    "buyer": null
+  }
+},
+{
+  "model": "items.listings",
+  "pk": 22,
+  "fields": {
+    "name": "Pig",
+    "price": 500.0,
+    "duration": null,
+    "description": "its a pig. it eats a lot.",
+    "created_at": "2022-12-16T01:54:22.821Z",
+    "item_image": "https://res.cloudinary.com/dwhucvmzd/image/upload/v1671155644/TRADE_HUB_API/ngwmydnz1vkdcjxf97ij.jpg",
+    "category": 16,
+    "owner": 3,
+    "buyer": null
+  }
+}
+]

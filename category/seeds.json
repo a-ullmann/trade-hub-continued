@@ -1,0 +1,114 @@
+[
+{
+  "model": "category.category",
+  "pk": 1,
+  "fields": {
+    "name": "Electronics"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 2,
+  "fields": {
+    "name": "Clothing"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 3,
+  "fields": {
+    "name": "Home and Garden"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 4,
+  "fields": {
+    "name": "Toys and Games"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 5,
+  "fields": {
+    "name": "Sports and Outdoors"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 6,
+  "fields": {
+    "name": "Beauty and Health"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 7,
+  "fields": {
+    "name": "Furniture and Decor"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 8,
+  "fields": {
+    "name": "Books and Media"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 9,
+  "fields": {
+    "name": "Food and Grocery"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 10,
+  "fields": {
+    "name": "Automotive"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 11,
+  "fields": {
+    "name": "Tools and Home Improvement"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 12,
+  "fields": {
+    "name": "Pet Supplies"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 13,
+  "fields": {
+    "name": "Music and Movies"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 14,
+  "fields": {
+    "name": "Art and Crafts"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 15,
+  "fields": {
+    "name": "Baby and Kids"
+  }
+},
+{
+  "model": "category.category",
+  "pk": 16,
+  "fields": {
+    "name": "Other"
+  }
+}
+]
