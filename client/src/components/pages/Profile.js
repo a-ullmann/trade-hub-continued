@@ -224,17 +224,22 @@ const Profile = ({ itemFields, setItemFields }) => {
             />
           </Tab>
           <Tab eventKey='wire-transfer' title='Deposit Cash' className='profile-tab'>
-            <button onClick={handleDeposit}>Wire-transfer $$</button>
-            {showDeposit &&
-              <>
-                <form>
-                  <label htmlFor='amount'>Enter the amount you would like to deposit:</label>
-                  <input name='amount' type='number' onChange={handleChange} value={depositAmount.amount}></input>
-                  <button onClick={handleAmount}>Deposit</button>
-                  <button onClick={handleNoDeposit}>Back</button>
-                </form>
-              </>
-            }
+            <div className='deposit-div'>
+              <h1>Deposit quick and easy with our wire-transfer!</h1>
+              {!showDeposit &&
+                <button className='wire-btn' onClick={handleDeposit}>Wire-transfer $$</button>
+              }
+              {showDeposit &&
+                <>
+                  <form className='deposit-form'>
+                    <label htmlFor='amount'>Enter the amount you would like to deposit:</label>
+                    <input name='amount' type='number' onChange={handleChange} value={depositAmount.amount}></input>
+                    <button className='deposit-btn' onClick={handleAmount}>Deposit</button>
+                    <button onClick={handleNoDeposit}>Back</button>
+                  </form>
+                </>
+              }
+            </div>
           </Tab>
         </Tabs>
       </Container>

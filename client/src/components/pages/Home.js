@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom'
 import Filter from '../common/Filter'
+import { isAuthenticated } from '../../helpers/auth'
 
 
 const ItemIndex = () => {
@@ -41,8 +42,10 @@ const ItemIndex = () => {
       <section className='hero-image'>
         <div className='hero-text'>
           <h1>T R A D E &nbsp; &nbsp; H U B</h1>
-          <p>Your trusted Marketplace</p>
-          <button onClick={() => navigate('/register')} className='hero-btn'>Join us</button>
+          <h5 className='trust'>Your trusted Marketplace</h5>
+          {!isAuthenticated() &&
+            <button onClick={() => navigate('/register')} className='hero-btn'>Join us</button>
+          }
         </div>
       </section>
       <Container className='items-container'>

@@ -154,75 +154,83 @@ const ItemSingle = () => {
 
   return (
     <main className='single-page'>
-      <Row className='justify-content-center'>
-        <div className='item-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
-        <div className='item-info'>
-        </div>
-        <div className='item-description'>
-          {item.description}
-        </div>
-      </Row>
       <Row>
-        <div className='item-name'>{item.name}</div>
-        <div className='item-owner'>seller: <span>{profile && profile.username}</span></div>
-        <div className='item-price'>${item.price}</div>
-        <div className='buttons-div'>
-          {item.owner && isOwner(item.owner.id) ?
-            <>
-              <p>You own this item.</p>
-              <p
-                title='WATCH OUT! this deletes the item!'
-                className='item-delete-btn purchase-btn'
-                onClick={handleDelete}>
-                Delete this item.
-              </p>
-              {showDelConfirm &&
-                <>
-                  <div className='purchase-btn' onClick={deleteItem}>Yes</div>
-                  <div className='purchase-btn' onClick={handleKeep}>No</div>
-                </>
-              }
-            </>
-            :
-            <>
-              <div className='purchase-div'>
-                <div className='purchase-btn buy-now' onClick={handleBuy}>BUY NOW</div>
-                {showConfirmation && isValid ?
-                  <div className='confirmation'>
-                    <p>Are you sure you want to purchase this item?</p>
-                    <div className='confirmation-btns'>
-                      <div className='purchase-btn' onClick={handleYes}>Yes</div>
-                      <div className='purchase-btn' onClick={handleNo}>No</div>
-                    </div>
-                    <div className='calculation'>
-                      <p>Your Balance after this purchase:</p>
-                      <div>${profile.wallet.toLocaleString('en-EN', {
-                        useGrouping: true,
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                        groupingSeperator: ' ',
-                      })} - <span className='item-cost'>${item.price.toLocaleString('en-EN', {
-                        useGrouping: true,
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                        groupingSeperator: ' ',
-                      })}</span> = <span className='display-4'>${((profile.wallet) - (item.price)
-                      ).toLocaleString('en-EN', {
-                        useGrouping: true,
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                        groupingSeperator: ' ',
-                      })}</span>
+        <Col className='col'>
+          <div className='item-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+          <div className='buttons-div'>
+            {item.owner && isOwner(item.owner.id) ?
+              <>
+                <div className='delete-div'>
+                  <p>You own this item.</p>
+                  <p
+                    title='WATCH OUT! this deletes the item!'
+                    className='item-delete-btn purchase-btn'
+                    onClick={handleDelete}>
+                    Delist this item.
+                  </p>
+                  {showDelConfirm &&
+                    <>
+                      <div>
+                        <div className='purchase-btn' onClick={deleteItem}>Yes</div>
+                        <div className='purchase-btn' onClick={handleKeep}>No</div>
                       </div>
-                    </div>
+                    </>
+                  }
+                </div>
+              </>
+              :
+              <>
+                <div className='purchase-div'>
+                  <div className='purchase-btn buy-now' onClick={handleBuy}>BUY NOW</div>
+                  <div>
+                    {showConfirmation && isValid ?
+                      <div className='confirmation'>
+                        <p>Are you sure you want to purchase this item?</p>
+                        <div className='confirmation-btns'>
+                          <div className='purchase-btn' onClick={handleYes}>Yes</div>
+                          <div className='purchase-btn' onClick={handleNo}>No</div>
+                        </div>
+                        <div className='calculation'>
+                          <p>Your Balance after this purchase:</p>
+                          <div>${profile.wallet.toLocaleString('en-EN', {
+                            useGrouping: true,
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            groupingSeperator: ' ',
+                          })} - <span className='item-cost'>${item.price.toLocaleString('en-EN', {
+                            useGrouping: true,
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            groupingSeperator: ' ',
+                          })}</span> = <span className='display-4'>${((profile.wallet) - (item.price)
+                          ).toLocaleString('en-EN', {
+                            useGrouping: true,
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                            groupingSeperator: ' ',
+                          })}</span>
+                          </div>
+                        </div>
+                      </div>
+                      : null
+                    }
                   </div>
-                  : null
-                }
-              </div>
-            </>
-          }
-          {!isValid ? <div>Wallet balance too low</div> : null}
-        </div>
+                </div>
+              </>
+            }
+            {!isValid ? <div>Wallet balance too low</div> : null}
+          </div>
+        </Col>
+        <Col className='col info-col'>
+          <div className='item-info'>
+            <div className='item-name'>{item.name}</div>
+            <div className='item-owner'>seller: <span>{profile && profile.username}</span></div>
+            <div className='item-price'>${item.price}</div>
+            <div className='item-description'>
+              {item.description}
+            </div>
+          </div>
+        </Col>
       </Row>
     </main>
   )

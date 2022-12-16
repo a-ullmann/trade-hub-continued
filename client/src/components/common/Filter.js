@@ -44,7 +44,7 @@ const Filter = ({ items, setFilteredItems }) => {
       <div className='filter-div'>
         {items.length ?
           <select onChange={handleChange} name='category' id='filter' value={filter.category}>
-            <option value='0'>All</option>
+            <option value='0'>All Categories</option>
             {categories.map(category => {
               const { name, id } = category
               return (
