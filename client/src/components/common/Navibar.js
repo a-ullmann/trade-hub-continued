@@ -13,7 +13,7 @@ const Navibar = () => {
 
 
   const navigate = useNavigate()
-  const [userId] = useState(() => {
+  const [userId, setUserId] = useState(() => {
     if (getToken()) return getPayload().sub
     return ''
   })

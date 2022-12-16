@@ -96,7 +96,7 @@ const Register = () => {
           type='number'
           step='0.01'
           name='wallet'
-          placeholder='Enter your amount *'
+          placeholder='Deposit Amount *'
           onChange={handleChange}
           value={formFields.wallet}
         />
