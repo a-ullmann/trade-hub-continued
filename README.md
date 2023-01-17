@@ -1,5 +1,7 @@
 # Project 4 - Trade Hub
 
+<img src="/src/images/readMe-images/landing.png" alt="Homepage" title="Homepage">
+
 </br>
 <h2>Description</h2>
 
@@ -44,7 +46,7 @@ This solo project was to be completed within 7 working days.
   <li>pylint</li>
   <li>autopep8</li>
   <li>Django Rest Framework</li>
-  <li>jwt</li>
+  <li>JWT</li>
 </ul>
 
   <h4>Front End</h4>
@@ -75,11 +77,11 @@ This solo project was to be completed within 7 working days.
 <h2>Brief</h2>
 
 <ul>
-<li>Build a full-stack application by making your own backend and your own front-end</li>
-<li>Use a Python Django API using Django REST Framework to serve your data from a Postgres database</li>
-<li>Consume your API with a separate front-end built with React</li>
-<li>Be a complete product which most likely means multiple relationships and CRUD functionality for at least a couple of models</li>
-<li>Implement thoughtful user stories/wireframes that are significant enough to help you know which features are core MVP and which you can cut</li>
+<li>Build a full-stack application by making your own backend and your own front-end.</li>
+<li>Use a Python Django API using Django REST Framework to serve your data from a Postgres database.</li>
+<li>Consume your API with a separate front-end built with React.</li>
+<li>Be a complete product which most likely means multiple relationships and CRUD functionality for at least a couple of models.</li>
+<li>Implement thoughtful user stories/wireframes that are significant enough to help you know which features are core MVP and which you can cut.</li>
 <li>Have a visually impressive design to kick your portfolio up a notch and have something to wow future clients & employers.</li>
 <li>Be deployed online so it's publicly accessible.</li>
 </ul>
@@ -91,9 +93,9 @@ This solo project was to be completed within 7 working days.
 
 After careful consideration of what kind of project I wanted to create, I decided on a peer-to-peer marketplace. The inspiration came from an NFT-Marketplace, however due to the limited time and workforce, I decided to keep it simple and make a universal marketplace. The first step was to create a Wireframe on Excalidraw, allowing me to visualise my ideas. 
 
-This wireframe shows three different pages as well as a nav-bar: 
+<img src="/src/images/readMe-images/wireframe.png" alt="wireframe" title="Wireframe">
 
-</br>
+<h3>This wireframe shows three different pages as well as a nav-bar:</h3>
 <h3>Nav-bar</h3>
 
 The nav-bar would be always on top of every page for consistency. It will have a logo on the left with a redirect to the landing page when clicked on, a search bar to find items, a login and registration option if the user is not currently logged in, or a profile and logout option if they are. 
@@ -122,6 +124,7 @@ Subcategories. This would make it easier for users to find a product they are lo
 
 I also set up a Trello board to keep track of any bugs I encountered during the coding process.
 
+<img src="/src/images/readMe-images/trello.png" alt="Trello" title="Trello">
 
 
 </br>
@@ -131,9 +134,12 @@ I also set up a Trello board to keep track of any bugs I encountered during the 
 
 Using the experience I gained from my previous projects in the software engineering course by General Assembly, my starting point was to set up the backend. For the first step, I visualised the relationships of my models I was going to have. To do this, I used quickdatabasediagrams.com as seen below:
 
+<img src="/src/images/readMe-images/quickdb.png" alt="Quick Database Diagrams" title="Quick Database Diagrams">
+
 </br>
 <h4>User Model </h4>
 
+<img src="/src/images/readMe-images/user-model.png" alt="User Model" title="User Model">
 
 I extended Django’s Abstract User class to add additional fields.
 
@@ -142,16 +148,18 @@ I extended Django’s Abstract User class to add additional fields.
 
 This model was the most elaborate one. The most interesting part of this model was the owner and buyer, as it would dictate on which list it would show. If the item was listed by a user, then the “owner” would be populated and it would show in the user’s profile tab. If another user were to buy this item, the “buyer” field would get populated and it would therefore show on the buyer’s purchase tab. This was filtered in an APIView as explained later in the build process.
 
+<img src="/src/images/readMe-images/listings-model.png" alt="Listings Model" title="Listings Model">
+
 </br>
 <h4>Category Model</h4>
 
 This is a straight-forward model that would have a one-to-many relationship with items. 
 
-
+<img src="/src/images/readMe-images/category-model.png" alt="Category Model" title="Category Model">
 
 To implement CRUD functionality, various views were created for each model. A basic example would be an APIView from the items model. The following screenshot shows the get and post method for all items. 
 
-
+<img src="/src/images/readMe-images/ListingsListView.png" alt="Listings API View" title="Listings API View">
 
 
 The get method filters and only returns items that have no buyer. This results in showing only listed items on the homepage.
@@ -160,7 +168,7 @@ The post method, in this example, creates a new listing as it also populates the
 
 A more interesting example, as seen below, was creating different views for the user’s profile page. I initially struggled to filter the purchased and listed items in the front end, as I had done in previous projects, but doing this operation in the backend made much more sense. Not only does it feel simpler to implement, it also makes the API more scalable as it delivers only the necessary data to the frontend, resulting in faster loading times. 
 
-
+<img src="/src/images/readMe-images/purchased-listed-view.png" alt="Purchased and Listed API View" title="Purchased and Listed API View">
 
 
 
@@ -175,27 +183,37 @@ The screenshot below shows the homepage of “Trade Hub”. It consists of a nav
 </br>
 <h4>Homepage</h4>
 
+<img src="/src/images/readMe-images/landing.png" alt="Homepage" title="Homepage">
+
 The data was fetched by using a GET-method with Axios, as seen by the useEffect function below:
 
+<img src="/src/images/readMe-images/getData.png" alt="Axios Request" title="Axios Request">
 
-This component would return the filteredItems (in this case, items that do not have a buyer), map them and, by using react-bootstrap, display each item as an individual card with the deconstructed data as seen below:
+The component below would return the filteredItems (in this case, items that do not have a buyer), map them and, by using react-bootstrap, display each item as an individual card with the deconstructed data as seen here:
+
+<img src="/src/images/readMe-images/items-row.png" alt="Data Return" title="Data Return">
 
 Every item that does not have an image provided when posted, a default image will be selected through a ternary statement. 
 
 </br>
 <h4>Single Item Page</h4>
 
+<img src="/src/images/readMe-images/single.png" alt="Single Item Page" title="Single Item Page">
 
 The screenshot above shows a single item’s page, showing various data of an item. If the user is logged in, they can use the “BUY NOW” button to open a confirmation box including a summary of their balance:
+
+<img src="/src/images/readMe-images/buy-now.png" alt="Buy Now Confirmation" title="Buy Now Confirmation">
 
 </br>
 <h4>Profile Page</h4>
 
 This page shows the individual user’s name as well as balance and four tabs, as can be seen below:
 
+<img src="/src/images/readMe-images/profile.png" alt="Profile Page" title="Profile Page">
+
 Once the user has purchased the item from the item page, it gets removed from the homepage and shows up in the “purchased” tab on the profile page. The tabs were created using React Bootstrap, as can be seen below.
 
-
+<img src="/src/images/readMe-images/return-tab.png" alt="Bootstrap Tabs" title="Bootstrap Tabs">
 
 
 </br>
@@ -234,9 +252,9 @@ The first time a user is logged in, when pressing on the profile page, it displa
 <ul>
   <li>Complete the pseudo-transactions by adding the amount of the purchased item to the original owner. </li>
   <li>Currently it only deducts the amount from the buyer.</li>
-  <li>Create better naming</li>
-  <li>Error handling (especially on register page and listing an item)</li>
-  <li>Implement a timer for listings</li>
+  <li>Create better naming.</li>
+  <li>Error handling (especially on register page and listing an item).</li>
+  <li>Implement a timer for listings.</li>
 </ul>
 
 
