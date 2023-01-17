@@ -37,17 +37,18 @@ This solo project was to be completed within 7 working days.
 </br>
 <h2>Technologies Used</h2>
 
-<ul>
   <h4>Back End</h4>
+<ul>
   <li>Python</li>
   <li>Django</li>
   <li>pylint</li>
   <li>autopep8</li>
   <li>Django Rest Framework</li>
   <li>jwt</li>
-
+</ul>
 
   <h4>Front End</h4>
+<ul>
   <li>JavaScript</li>
   <li>JSX (HTML5 with react)</li>
   <li>Axios</li>
@@ -57,9 +58,10 @@ This solo project was to be completed within 7 working days.
   <li>React-router-dom</li>
   <li>React-scripts</li>
   <li>Sass</li>
-
+</ul>
 
   <h4>Other Tools</h4>
+<ul>
   <li>Insomnia</li>
   <li>TablePlus</li>
   <li>Trello</li>
@@ -91,23 +93,27 @@ After careful consideration of what kind of project I wanted to create, I decide
 
 This wireframe shows three different pages as well as a nav-bar: 
 
+</br>
 <h3>Nav-bar</h3>
 
 The nav-bar would be always on top of every page for consistency. It will have a logo on the left with a redirect to the landing page when clicked on, a search bar to find items, a login and registration option if the user is not currently logged in, or a profile and logout option if they are. 
 
-
+</br>
 <h3>Item index page </h3>
 
 This page will be the landing page. The thought process here was that if a new user visits my application, they would be directly exposed to all of the products they could potentially be interested in. In the best case, this would incentivise them to register in order to purchase their desired product. This page would also have a dropdown menu that would act as a filter for the ability to show the desired categories.
 
+</br>
 <h3>Single item page</h3>
 
 This page would be accessed by clicking on an item from the index page. Here, the most important information of an item will be displayed, such as the name, picture, price and description. If the user decides to buy this item, they can use the “BUY NOW” button, which would open a confirmation box. 
 
+</br>
 <h3>Profile page </h3>
 
 On this page users will find four different tabs, where they will be able to create a listing, view their listings as well as their purchased items, and deposit cash. 
 
+</br>
 <h4>Additional ideas that were not implemented due to limited time:</h4>
 
 A wish list or shopping cart system. With this, users would be able to track their desired purchases. 
@@ -125,17 +131,18 @@ I also set up a Trello board to keep track of any bugs I encountered during the 
 
 Using the experience I gained from my previous projects in the software engineering course by General Assembly, my starting point was to set up the backend. For the first step, I visualised the relationships of my models I was going to have. To do this, I used quickdatabasediagrams.com as seen below:
 
-
+</br>
 <h4>User Model </h4>
 
 
 I extended Django’s Abstract User class to add additional fields.
 
+</br>
 <h4>Item Model</h4>
 
 This model was the most elaborate one. The most interesting part of this model was the owner and buyer, as it would dictate on which list it would show. If the item was listed by a user, then the “owner” would be populated and it would show in the user’s profile tab. If another user were to buy this item, the “buyer” field would get populated and it would therefore show on the buyer’s purchase tab. This was filtered in an APIView as explained later in the build process.
 
-
+</br>
 <h4>Category Model</h4>
 
 This is a straight-forward model that would have a one-to-many relationship with items. 
@@ -158,14 +165,15 @@ A more interesting example, as seen below, was creating different views for the 
 
 
 
-
+</br>
+</br>
 <h3>Front End:</h3>
 
 
 The screenshot below shows the homepage of “Trade Hub”. It consists of a nav-bar, a hero section including a register button that only shows if the user is not logged in, and the main section containing the listed items, which can be filtered by category. These items show regardless of user authentication, letting also unregistered users view the products. 
 
+</br>
 <h4>Homepage</h4>
-
 
 The data was fetched by using a GET-method with Axios, as seen by the useEffect function below:
 
@@ -174,11 +182,13 @@ This component would return the filteredItems (in this case, items that do not h
 
 Every item that does not have an image provided when posted, a default image will be selected through a ternary statement. 
 
+</br>
 <h4>Single Item Page</h4>
 
 
 The screenshot above shows a single item’s page, showing various data of an item. If the user is logged in, they can use the “BUY NOW” button to open a confirmation box including a summary of their balance:
 
+</br>
 <h4>Profile Page</h4>
 
 This page shows the individual user’s name as well as balance and four tabs, as can be seen below:
