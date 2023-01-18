@@ -14,7 +14,7 @@ For our final project of the Software Engineering Course at General Assembly, I 
 <h2>Deployment link</h2>
 
 
-This project was deployed with Heroku and can be found <a href="https://trade-hub-project.herokuapp.com/ "> here</a>.
+This project was deployed with Heroku and can be found <a href="https://trade-hub-project.herokuapp.com/"> here</a>.
 
 
 
@@ -118,9 +118,11 @@ On this page users will find four different tabs, where they will be able to cre
 </br>
 <h4>Additional ideas that were not implemented due to limited time:</h4>
 
-A wish list or shopping cart system. With this, users would be able to track their desired purchases. 
-A countdown timer on each item. This would serve as an additional incentive for users to complete the purchase as they would feel a time pressure. 
-Subcategories. This would make it easier for users to find a product they are looking for once the database reaches a larger size. 
+<ul>
+  <li>A wish list or shopping cart system. With this, users would be able to track their desired purchases.</li>
+  <li>A countdown timer on each item. This would serve as an additional incentive for users to complete the purchase as they would feel a time pressure. </li>
+  <li>Subcategories. This would make it easier for users to find a product they are looking for once the database reaches a larger size. </li>
+</ul>
 
 I also set up a Trello board to keep track of any bugs I encountered during the coding process.
 
@@ -136,8 +138,10 @@ Using the experience I gained from my previous projects in the software engineer
 
 <img src="client/src/assets/readMe-images/quickdb.png" alt="Quick Database Diagrams" title="Quick Database Diagrams">
 
+The user ID would have a one-to-many relationship with the owner and buyer of an item, as one user is able to own or buy mulitple items. An item has a many-to-one relationship with a category, as different items can have the same category.
+
 </br>
-<h4>User Model </h4>
+<h4>User Model</h4>
 
 <img src="client/src/assets/readMe-images/user-model.png" alt="User Model" title="User Model">
 
@@ -162,7 +166,7 @@ To implement CRUD functionality, various views were created for each model. A ba
 <img src="client/src/assets/readMe-images/ListingsListView.png" alt="Listings API View" title="Listings API View">
 
 
-The get method filters and only returns items that have no buyer. This results in showing only listed items on the homepage.
+The GET method filters and only returns items that have no buyer. This results in showing only listed items on the homepage.
 
 The post method, in this example, creates a new listing as it also populates the class with an ‘owner’ key. It then takes the ListingsSerializer and tries to add the requested data. Using Django’s .is_valid() function, it checks if the requested data matches the model and if it does, it saves it, else, it returns the errors and an HTTP status of 422 (unprocessable entity).
 
@@ -252,7 +256,7 @@ The first time a user is logged in, when pressing on the profile page, it displa
 <ul>
   <li>Complete the pseudo-transactions by adding the amount of the purchased item to the original owner. </li>
   <li>Currently it only deducts the amount from the buyer.</li>
-  <li>Create better naming.</li>
+  <li>Create better naming for models and elements.</li>
   <li>Error handling (especially on register page and listing an item).</li>
   <li>Implement a timer for listings.</li>
 </ul>
