@@ -256,6 +256,7 @@ The first time a user is logged in, when pressing on the profile page, it displa
 <ul>
   <li>Complete the pseudo-transactions by adding the amount of the purchased item to the original owner. </li>
   <li>Currently it only deducts the amount from the buyer.</li>
+  <li>Make the app mobile friendly by making it responsive.</li>
   <li>Create better naming for models and elements.</li>
   <li>Error handling (especially on register page and listing an item).</li>
   <li>Implement a timer for listings.</li>
