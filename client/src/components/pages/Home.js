@@ -56,13 +56,13 @@ const ItemIndex = () => {
             {filteredItems.map(item => {
               const { name, price, id, owner } = item
               return (
-                <Col key={id} xs={7} sm={6} md={5} lg={4} xl={3} className='items-col'>
-                  <Card onClick={() => navigate(`/${id}`)} style={{ width: '18rem' }} className='mt-3 items-card'>
+                <Col key={id} xs={6} sm={6} md={5} lg={4} xl={3} className='items-col'>
+                  <Card onClick={() => navigate(`/${id}`)} className='mt-3 items-card'>
                     <Card.Body>
                       <div className='card-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
                       <Card.Footer className='items-div'>
                         <div className='card-name'>
-                          <div>{name}</div>
+                          <div className='card-title'>{name}</div>
                           <div className='item-price'>${price.toLocaleString('en-EN', {
                             useGrouping: true,
                             minimumFractionDigits: 2,
