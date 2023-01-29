@@ -145,12 +145,19 @@ const ItemSingle = () => {
 
 
 
-
   return (
     <main className='single-page'>
       <Row>
+        <Col className='col info-col'>
+          <div className='item-info'>
+            <div className='item-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
+            <div className='item-name'>{item.name}</div>
+            <div className='item-owner'>seller: <span>{profile && profile.username}</span></div>
+            <div className='item-price'>${item.price}</div>
+            <div className='item-description'>{item.description}</div>
+          </div>
+        </Col>
         <Col className='col'>
-          <div className='item-image' style={{ backgroundImage: ` url(${item.item_image ? item.item_image : defaultImage})` }}></div>
           <div className='buttons-div'>
             {item.owner && isOwner(item.owner.id) ?
               <>
@@ -215,16 +222,7 @@ const ItemSingle = () => {
             {!isValid ? <div>Wallet balance too low</div> : null}
           </div>
         </Col>
-        <Col className='col info-col'>
-          <div className='item-info'>
-            <div className='item-name'>{item.name}</div>
-            <div className='item-owner'>seller: <span>{profile && profile.username}</span></div>
-            <div className='item-price'>${item.price}</div>
-            <div className='item-description'>
-              {item.description}
-            </div>
-          </div>
-        </Col>
+
       </Row>
     </main>
   )
